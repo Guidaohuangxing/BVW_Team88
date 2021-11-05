@@ -10,7 +10,11 @@ public class Sword : MonoBehaviour
     //sword position on which path
     public int position = 0;
 
-    public Vector3 swordPos;
+    public float swordLength = 5f;
+    public Vector3 currentPos;
+
+
+    public Vector3 previousPos;
     //minmun speed to make slash;
     public float minSpeed = 30f;
 
@@ -19,6 +23,12 @@ public class Sword : MonoBehaviour
     public FakeEnemy fakeEnemy;
 
     public Vector3 slashOffset;
+
+    private Slash currentSlash;
+    private float slashTimer = 0;
+    public int UpdateInterval = 20;
+    public GameObject SlashPrefab;
+
     [System.Serializable]
     public class SwordArea
     {
@@ -46,22 +56,33 @@ public class Sword : MonoBehaviour
     }
     private void Update()
     {
+        currentPos = swordTracker.InverseTransformPoint(transform.position + transform.forward * swordLength);
         //print((swordTracker.position - swordPos).magnitude / Time.deltaTime);
-        if((swordTracker.position- swordPos).magnitude / Time.deltaTime > minSpeed && !slashing)
+        if ((currentPos - previousPos).magnitude / Time.deltaTime > minSpeed && !slashing)
         {
             StartSlash();
         }
-        else if((swordTracker.position - swordPos).magnitude / Time.deltaTime <= minSpeed && slashing)
+        else if((currentPos - previousPos).magnitude / Time.deltaTime <= minSpeed && slashing)
         {
             EndSlash();
         }
-        swordPos = swordTracker.position;
+        previousPos = currentPos;
+
+        if (slashing)
+        {
+            slashTimer += Time.deltaTime;
+            if(slashTimer >(1/ UpdateInterval))
+            {
+                currentSlash.UpadateSlash(currentPos, slashOffset);
+            }
+        }
     }
 
 
     private void Initialized()
     {
-        swordPos = swordTracker.position;
+        currentPos = swordTracker.InverseTransformPoint(transform.position + transform.forward * swordLength);
+        previousPos = currentPos;
         fakeEnemy = FindObjectOfType<FakeEnemy>();
         float startX = -fakeEnemy.cameraLength / 2;
         for(int i = 0; i < fakeEnemy.pathsNum; i++)
@@ -83,7 +104,7 @@ public class Sword : MonoBehaviour
         slashing = true;
         foreach(var item in swordAreas)
         {
-            if (item.InArea(swordPos))
+            if (item.InArea(previousPos))
             {
                 position = item.number;
                 this.transform.position = item.swordPos;
@@ -91,7 +112,7 @@ public class Sword : MonoBehaviour
         }
         slashOffset = swordTracker.position - this.transform.position;
         slashOffset.z = 0;
-
+        currentSlash = Instantiate(SlashPrefab).GetComponent<Slash>();
     }
     public void EndSlash()
     {
