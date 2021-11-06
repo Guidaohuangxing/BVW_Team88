@@ -32,20 +32,16 @@ public class Slash : MonoBehaviour
                 GameObject go = SlashColliders[newestSlashColliderNumber];
                 go.transform.position = (poss[poss.Length - 1] + poss[poss.Length - 2]) / 2;
                 Vector3 dir = poss[poss.Length - 1] - poss[poss.Length - 2];
-                //float angle = Vector3.Angle(go.transform.up, dir);
-                //if(Vector3.Cross(go.transform.up, dir).z > 0)
-                //{
-                //    angle = -angle;
-                //}
                 Quaternion rotateTo = Quaternion.FromToRotation(go.transform.up, dir);
-                go.transform.rotation = rotateTo;
+                print(rotateTo);
+                go.transform.rotation = rotateTo * go.transform.rotation;
                 newestSlashColliderNumber++;
             }
         }
         else if(pastPos.Count == limitPos)
         {
             pastPos.Dequeue();
-            newestSlashColliderNumber = 0;
+            
             pastPos.Enqueue(slashPos);
             Vector3[] poss = pastPos.ToArray();
             SlashColliders[newestSlashColliderNumber].SetActive(true);
@@ -53,18 +49,13 @@ public class Slash : MonoBehaviour
             go.transform.position = (poss[poss.Length - 1] + poss[poss.Length - 2]) / 2;
             Vector3 dir = poss[poss.Length - 1] - poss[poss.Length - 2];
             Quaternion rotateTo = Quaternion.FromToRotation(go.transform.up, dir);
-            go.transform.rotation = rotateTo;
-            
+            go.transform.rotation = rotateTo * go.transform.rotation;
+
             newestSlashColliderNumber++;
         }
-        if(pastPos.Count > 2)
+        if(newestSlashColliderNumber == 9)
         {
-            if (debugPrefab)
-            {
-                Destroy(Instantiate(debugPrefab, slashPos, Quaternion.identity), .1f);
-            }
-
-            
+            newestSlashColliderNumber = 0;
         }
 
     }
