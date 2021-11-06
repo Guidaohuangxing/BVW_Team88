@@ -24,6 +24,6 @@ public class AttackObject : MonoBehaviour,Attackable
 
     public void onHit()
     {
-        Destroy(this.gameObject, 1f);
+        Destroy(this.gameObject, 0.2f);
     }
 }

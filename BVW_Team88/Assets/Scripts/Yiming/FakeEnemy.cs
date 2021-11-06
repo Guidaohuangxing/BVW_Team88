@@ -15,8 +15,8 @@ public class FakeEnemy : MonoBehaviour
     private float[] times;
     private float thresholdTime;
     private List<Vector3> GeneratePosition = new List<Vector3>();
-    public float high = 0.3f;
-    public float CameraHigh = 1f;
+    public float high = 0.1f;
+    public float CameraHigh = 5f;
     private void Start()
     {
         Initialized();

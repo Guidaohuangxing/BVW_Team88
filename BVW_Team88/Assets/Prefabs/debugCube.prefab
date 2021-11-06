@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4741741328845404554}
   - component: {fileID: 7437822073283431223}
   - component: {fileID: 4427651146076738395}
-  - component: {fileID: 7144810199228088448}
+  - component: {fileID: -2766762738481605539}
   m_Layer: 0
   m_Name: debugCube
   m_TagString: Untagged
@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 5866907155312959245}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -91,12 +91,12 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5866907155312959245}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7144810199228088448
+--- !u!114 &-2766762738481605539
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -105,10 +105,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 5866907155312959245}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5796a5edd65480649b9479620c32c20a, type: 3}
+  m_Script: {fileID: 11500000, guid: 00ed63076a7c1f04bbf5d5ebda94dfff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreAward: 3
-  speed: 2
-  damage: 5
-  targetPosition: {x: 0, y: 0, z: 0}

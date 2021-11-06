@@ -13,16 +13,17 @@ public class Slash : MonoBehaviour
     }
     public void UpadateSlash(Vector3 trackerPos, Vector3 offset)
     {
+        trackerPos = Vector3.ProjectOnPlane(trackerPos, new Vector3(0, 0, 1));
         Vector3 slashPos = trackerPos - offset;
         pastPos.Add(slashPos);
         if(pastPos.Count > 2)
         {
             if (debugPrefab)
             {
-                Destroy(Instantiate(debugPrefab, slashPos, Quaternion.identity), .5f);
+                Destroy(Instantiate(debugPrefab, pastPos[pastPos.Count - 2], Quaternion.identity), .1f);
             }
-            
-            //BoxCollider bc = new GameObject("")
+
+            transform.position = pastPos[pastPos.Count - 2];
         }
 
     }
