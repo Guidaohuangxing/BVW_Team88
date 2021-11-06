@@ -48,7 +48,7 @@ public class GameManager : MonoBehaviour
             float lx = posX;
             posX += playerPosLength / pathsNum;
             float rx = posX;
-            area.swordPos = new Vector3((rx + lx) * 2 / 4, (area.lowY + area.highY) * .5f / 4, -14);
+            area.swordPos = new Vector3((rx + lx) * 2 / 4, (area.lowY + area.highY) * 2f / 4, -14);
             area.playerPos = new Vector3((rx + lx) * 2 / 4, (area.lowY + area.highY) * 0, -15);
             swordAreas.Add(area);
         }

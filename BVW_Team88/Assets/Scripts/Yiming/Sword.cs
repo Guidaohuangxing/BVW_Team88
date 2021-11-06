@@ -60,6 +60,7 @@ public class Sword : MonoBehaviour
             if(slashTimer >(1/ UpdateInterval))
             {
                 currentSlash.UpadateSlash(currentPos, slashOffset);
+                slashTimer = 0;
             }
         }
         previousPos = currentPos;
@@ -79,7 +80,8 @@ public class Sword : MonoBehaviour
     {
         print("StartSlash");
         slashing = true;
-        currentSlash = Instantiate(SlashPrefab, transform).GetComponent<Slash>();
+        SlashPrefab.SetActive(true);
+        currentSlash = SlashPrefab.GetComponent<Slash>();
         currentSlash.SlashOrgin(player.SwordStartPosition);
         slashOffset = Vector3.ProjectOnPlane(currentPos, normalPlane) - player.SwordStartPosition;
         currentSlash.UpadateSlash(currentPos, slashOffset);
@@ -88,12 +90,7 @@ public class Sword : MonoBehaviour
     {
         print("StopSlash");
         slashing = false;
+        currentSlash.Destory();
     }
-    /// <summary>
-    /// use the starting point of the slash to find the right position of sword(in which paths
-    /// </summary>
-    public void ResetSwordPosition()
-    {
-
-    }
+    
 }
