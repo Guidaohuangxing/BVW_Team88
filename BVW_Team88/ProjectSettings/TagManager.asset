@@ -3,7 +3,19 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - projectile
+  - FxTemporaire
+  - TrashType1
+  - TrashType2
+  - TrashType3
+  - TrashType4
+  - Type1
+  - Type2
+  - Type3
+  - Type4
+  - L1EndPoint
+  - L2EndPoint
   layers:
   - Default
   - TransparentFX
