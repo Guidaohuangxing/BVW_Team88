@@ -11,7 +11,7 @@ public class Player : MonoBehaviour
     public Sword childSword;
     private float timer =0;
     public float threshold = .1f;
-
+    public string tagName;
     private void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
@@ -44,4 +44,5 @@ public class Player : MonoBehaviour
             }
         }
     }
+
 }

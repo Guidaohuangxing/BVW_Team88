@@ -20,6 +20,7 @@ TagManager:
   - BossEndPoint
   - StackUp
   - StackDown
+  - DamagePoint
   layers:
   - Default
   - TransparentFX
