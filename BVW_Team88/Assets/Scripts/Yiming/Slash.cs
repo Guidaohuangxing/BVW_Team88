@@ -33,7 +33,7 @@ public class Slash : MonoBehaviour
                 go.transform.position = (poss[poss.Length - 1] + poss[poss.Length - 2]) / 2;
                 Vector3 dir = poss[poss.Length - 1] - poss[poss.Length - 2];
                 Quaternion rotateTo = Quaternion.FromToRotation(go.transform.up, dir);
-                print(rotateTo);
+                //print(rotateTo);
                 go.transform.rotation = rotateTo * go.transform.rotation;
                 newestSlashColliderNumber++;
             }
@@ -53,7 +53,7 @@ public class Slash : MonoBehaviour
 
             newestSlashColliderNumber++;
         }
-        if(newestSlashColliderNumber == 9)
+        if(newestSlashColliderNumber == SlashColliders.Count)
         {
             newestSlashColliderNumber = 0;
         }

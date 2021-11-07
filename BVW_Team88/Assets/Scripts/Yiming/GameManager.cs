@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
         public Vector3 playerPos;
         public bool InArea(Vector3 point)
         {
-            if (point.x <= rightX && point.x >= leftX && point.y <= highY && point.y >= lowY)
+            if (point.x < rightX && point.x > leftX)
             {
                 return true;
             }
@@ -54,9 +54,5 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
 }

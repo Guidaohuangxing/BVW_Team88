@@ -9,7 +9,8 @@ public class Player : MonoBehaviour
     public int position;
     public Vector3 SwordStartPosition;
     public Sword childSword;
-
+    private float timer =0;
+    public float threshold = .1f;
 
     private void Start()
     {
@@ -18,13 +19,20 @@ public class Player : MonoBehaviour
     }
     private void Update()
     {
-        UpdatePosition();
+        timer += Time.deltaTime;
+        if(timer>= threshold)
+        {
+            UpdatePosition();
+            timer = 0;
+        }
+        print("excutive this");
     }
 
     public void UpdatePosition()
     {
         if (!childSword.slashing)
         {
+            //print("track area" + tracker.position);
             foreach(var item in gameManager.swordAreas)
             {
                 if (item.InArea(tracker.position))

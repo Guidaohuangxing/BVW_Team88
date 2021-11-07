@@ -11,9 +11,10 @@ public class SlashCollider : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Attackable attackable = other.gameObject.GetComponent<Attackable>();
-        print("cut things");
-        if(attackable != null)
+        //print("cut things");
+        if(attackable != null && other.GetComponent<AttackObject>().attackable)
         {
+            other.GetComponent<AttackObject>().attackable = false;
             attackable.onHit();
             Vector3 tipsExitPosition = tipsTransform.position + new Vector3(0, 0, 2);
             //slice

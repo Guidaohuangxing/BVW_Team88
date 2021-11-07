@@ -9,12 +9,7 @@ public class AttackObject : MonoBehaviour,Attackable
     public float speed = 2;
     public int damage = 5;
     public Vector3 targetPosition;
-
-    private void Update()
-    {
-        MoveToPlayer();
-    }
-
+    public bool attackable = true;
 
     public void MoveToPlayer()
     {

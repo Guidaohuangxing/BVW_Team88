@@ -17,6 +17,7 @@ public class FakeEnemy : MonoBehaviour
     private List<Vector3> GeneratePosition = new List<Vector3>();
     public float high = 0.1f;
     public float CameraHigh = 5f;
+    public List<GameObject> Gos = new List<GameObject>();
     private void Start()
     {
         Initialized();
@@ -33,8 +34,13 @@ public class FakeEnemy : MonoBehaviour
                 int objectNum = (Random.Range(0, AttackObjects.Count));
                 GameObject go = Instantiate(AttackObjects[objectNum], GeneratePosition[i], Quaternion.identity);
                 go.GetComponent<AttackObject>().targetPosition = targetPos[i] - new Vector3(0, 0, 3);
+                Gos.Add(go);
                 times[i] = 0;
             }
+        }
+        foreach (var item in Gos)
+        {
+            if (item != null) { item.GetComponent<AttackObject>().MoveToPlayer(); }
         }
     }
     private void Initialized()

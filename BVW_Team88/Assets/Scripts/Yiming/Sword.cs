@@ -31,26 +31,33 @@ public class Sword : MonoBehaviour
     public Player player;
 
     Vector3 normalPlane = new Vector3(0, 0, 1);
-    
 
-    
-    
+    public float speed = 0;
+
+    public float speedTimer = 0.05f;
+    private float speedTime = 0;
     private void Start()
     {
         Initialized();
     }
     private void Update()
     {
-        //currentPos = swordTracker.InverseTransformPoint(transform.position + transform.forward * swordLength);
-        currentPos = swordTracker.transform.position + transform.forward * swordLength;
-        //print((currentPos - previousPos).magnitude / Time.deltaTime);
-        if ((currentPos - previousPos).magnitude / Time.deltaTime > minSpeed && !slashing)
+        speedTime += Time.deltaTime;
+        if(speedTime >= speedTimer)
         {
-            StartSlash();
-        }
-        else if((currentPos - previousPos).magnitude / Time.deltaTime <= minSpeed && slashing)
-        {
-            EndSlash();
+            currentPos = swordTracker.InverseTransformPoint(transform.position + transform.forward * swordLength);
+            speed = Mathf.Clamp((currentPos - previousPos).magnitude / speedTime, 0, 300);
+            if (speed > minSpeed && !slashing)
+            {
+                StartSlash();
+            }
+            else if (speed <= minSpeed && slashing)
+            {
+                EndSlash();
+            }
+            previousPos = currentPos;
+            speedTime = 0f;
+            print(slashing);
         }
         
 
@@ -59,18 +66,19 @@ public class Sword : MonoBehaviour
             slashTimer += Time.deltaTime;
             if(slashTimer >(1/ UpdateInterval))
             {
-                currentSlash.UpadateSlash(currentPos, slashOffset);
+                currentSlash.UpadateSlash(transform.TransformPoint(currentPos), slashOffset);
                 slashTimer = 0;
             }
         }
-        previousPos = currentPos;
+      
+       
+
     }
 
 
     private void Initialized()
     {
-        // currentPos = swordTracker.InverseTransformPoint(transform.position + transform.forward * swordLength);
-        currentPos = swordTracker.transform.position + transform.forward * swordLength;
+         currentPos = swordTracker.InverseTransformPoint(transform.position + transform.forward * swordLength);
         previousPos = currentPos;
         gameManager = FindObjectOfType<GameManager>();
         player = GetComponentInParent<Player>();
@@ -83,14 +91,15 @@ public class Sword : MonoBehaviour
         SlashPrefab.SetActive(true);
         currentSlash = SlashPrefab.GetComponent<Slash>();
         currentSlash.SlashOrgin(player.SwordStartPosition);
-        slashOffset = Vector3.ProjectOnPlane(currentPos, normalPlane) - player.SwordStartPosition;
-        currentSlash.UpadateSlash(currentPos, slashOffset);
+        slashOffset = Vector3.ProjectOnPlane(transform.TransformPoint(currentPos), normalPlane) - player.SwordStartPosition;
+        currentSlash.UpadateSlash(transform.TransformPoint(currentPos), slashOffset);
     }
     public void EndSlash()
     {
         print("StopSlash");
         slashing = false;
         currentSlash.Destory();
+        slashTimer = 0;
     }
     
 }
