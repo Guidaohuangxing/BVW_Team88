@@ -2,14 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BeatMovement : MonoBehaviour
+public class BeatMovement : MonoBehaviour, Attackable
 {
     public float speed = 2.5f;
+    public float OGSpeed = 2.5f;
+    public float bossSpeed = 2f;
     public Vector3 goToLoc;
 
     public bool laneSet = false;
-    public bool collectable = false;
-    public bool inPerfectZone = false;
+    public int scoreAward = 3;
+    public int damage = 5;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,50 +24,65 @@ public class BeatMovement : MonoBehaviour
         
     }
 
-    void OnTriggerEnter(Collider col) {
-        if (col.gameObject.tag == "CollectionBoundary") {
-            collectable = true;
-        }
-        if(col.gameObject.tag == "PerfectZone")
-        {
-            inPerfectZone = true;
-        }
-    }
+    //void OnTriggerEnter(Collider col) {
+    //    if (col.gameObject.tag == "CollectionBoundary") {
+    //        collectable = true;
+    //    }
+    //    if(col.gameObject.tag == "PerfectZone")
+    //    {
+    //        inPerfectZone = true;
+    //    }
+    //}
 
-    private void OnTriggerExit(Collider col)
-    {
-        if (col.gameObject.tag == "PerfectZone")
-        {
-            inPerfectZone = false;
-        }
-    }
+    //private void OnTriggerExit(Collider col)
+    //{
+    //    if (col.gameObject.tag == "PerfectZone")
+    //    {
+    //        inPerfectZone = false;
+    //    }
+    //}
 
-    public bool GetCollectable() {
-        return collectable;
-    }
+    //public bool GetCollectable() {
+    //    return collectable;
+    //}
 
-    public int GetPoints()
-    {
-        if(inPerfectZone)
-        {
-            return 10;
-        }
-        else
-        {
-            return 5;
-        }
-    }
+    //public int GetPoints()
+    //{
+    //    if(inPerfectZone)
+    //    {
+    //        return 10;
+    //    }
+    //    else
+    //    {
+    //        return 5;
+    //    }
+    //}
 
     public void SetLane(int lane) {
-        if (lane == 1) {
+        if (lane == 1)
+        {
             laneSet = true;
             goToLoc = GameObject.FindWithTag("L1EndPoint").transform.position;
             goToLoc.y = this.transform.position.y;
+            speed = OGSpeed;
         }
-        else if (lane == 2) {
+        else if (lane == 2)
+        {
             laneSet = true;
             goToLoc = GameObject.FindWithTag("L2EndPoint").transform.position;
             goToLoc.y = this.transform.position.y;
+            speed = OGSpeed; 
         }
+        else if (lane == 3) {
+            laneSet = true;
+            goToLoc = GameObject.FindWithTag("BossEndPoint").transform.position;
+            goToLoc.y = this.transform.position.y;
+            speed = bossSpeed;
+        }
+    }
+
+    public void onHit()
+    {
+        Destroy(this.gameObject, 0.2f);
     }
 }

@@ -8,7 +8,7 @@ public class SpawnBasedOnBPM : MonoBehaviour
     public float bpm = 96.0f;
     public float bpmRatio = 1.0f;
     public float bpmSpawn;
-    public GameObject spawnPointP1, spawnPointP2, spawnPointTentaclesUp, spawnPointTentaclesLow;
+    public GameObject spawnPointP1, spawnPointP2, spawnPointTentacles;
     public GameObject trash1Prefab, trash2Prefab, trash3Prefab, trash4Prefab, tentaclePrefab;
     public GameObject player1, player2, stackUp;
     //public GameObject p1Weapon, p2Weapon, p3Weapon, p4Weapon, stackLower, stackHigher;
@@ -19,10 +19,13 @@ public class SpawnBasedOnBPM : MonoBehaviour
     private float time = 0;
     private float beatTimer = 0;
 
+    private bool bossFight;
+
     public List<GameObject> p1Obj = new List<GameObject>();
     public List<GameObject> p2Obj = new List<GameObject>();
     public List<GameObject> p3Obj = new List<GameObject>();
     public List<GameObject> p4Obj = new List<GameObject>();
+    public List<GameObject> bossObj = new List<GameObject>();
 
     // Start is called before the first frame update
     void Start()
@@ -45,72 +48,88 @@ public class SpawnBasedOnBPM : MonoBehaviour
             GameObject instance;
 
             //spawning the object
-            if (randomNumber == 1)
+            if (!bossFight)
             {
-                if (p1T1) {
-                    instance = Instantiate(trash1Prefab, spawnPointP1.transform.position, spawnPointP1.transform.rotation);
-                    p1Obj.Add(instance);
-                    instance.GetComponent<BeatMovement>().SetLane(1);
-                }
-                else if (p1T2)
+                if (randomNumber == 1)
                 {
-                    instance = Instantiate(trash2Prefab, spawnPointP1.transform.position, spawnPointP1.transform.rotation);
-                    p2Obj.Add(instance);
-                    instance.GetComponent<BeatMovement>().SetLane(1);
-                }
-                else if (p1T3)
-                {
-                    instance = Instantiate(trash3Prefab, spawnPointP1.transform.position, spawnPointP1.transform.rotation);
-                    p3Obj.Add(instance);
-                    instance.GetComponent<BeatMovement>().SetLane(1);
-                }
-                else if (p1T4)
-                {
-                    instance = Instantiate(trash4Prefab, spawnPointP1.transform.position, spawnPointP1.transform.rotation);
-                    p4Obj.Add(instance);
-                    instance.GetComponent<BeatMovement>().SetLane(1);
-                }
+                    if (p1T1)
+                    {
+                        instance = Instantiate(trash1Prefab, spawnPointP1.transform.position, spawnPointP1.transform.rotation);
+                        p1Obj.Add(instance);
+                        instance.GetComponent<BeatMovement>().SetLane(1);
+                    }
+                    else if (p1T2)
+                    {
+                        instance = Instantiate(trash2Prefab, spawnPointP1.transform.position, spawnPointP1.transform.rotation);
+                        p2Obj.Add(instance);
+                        instance.GetComponent<BeatMovement>().SetLane(1);
+                    }
+                    else if (p1T3)
+                    {
+                        instance = Instantiate(trash3Prefab, spawnPointP1.transform.position, spawnPointP1.transform.rotation);
+                        p3Obj.Add(instance);
+                        instance.GetComponent<BeatMovement>().SetLane(1);
+                    }
+                    else if (p1T4)
+                    {
+                        instance = Instantiate(trash4Prefab, spawnPointP1.transform.position, spawnPointP1.transform.rotation);
+                        p4Obj.Add(instance);
+                        instance.GetComponent<BeatMovement>().SetLane(1);
+                    }
 
 
+                }
+                else if (randomNumber == 2)
+                {
+                    if (p2T1)
+                    {
+                        instance = Instantiate(trash1Prefab, spawnPointP2.transform.position, spawnPointP2.transform.rotation);
+                        p1Obj.Add(instance);
+                        instance.GetComponent<BeatMovement>().SetLane(2);
+                    }
+                    else if (p2T2)
+                    {
+                        instance = Instantiate(trash2Prefab, spawnPointP2.transform.position, spawnPointP2.transform.rotation);
+                        p2Obj.Add(instance);
+                        instance.GetComponent<BeatMovement>().SetLane(2);
+                    }
+                    else if (p2T3)
+                    {
+                        instance = Instantiate(trash3Prefab, spawnPointP2.transform.position, spawnPointP2.transform.rotation);
+                        p3Obj.Add(instance);
+                        instance.GetComponent<BeatMovement>().SetLane(2);
+                    }
+                    else if (p2T4)
+                    {
+                        instance = Instantiate(trash4Prefab, spawnPointP2.transform.position, spawnPointP2.transform.rotation);
+                        p4Obj.Add(instance);
+                        instance.GetComponent<BeatMovement>().SetLane(2);
+                    }
+                }
             }
-            else if (randomNumber == 2)
-            {
-                if (p2T1)
-                {
-                    instance = Instantiate(trash1Prefab, spawnPointP2.transform.position, spawnPointP2.transform.rotation);
-                    p1Obj.Add(instance);
-                    instance.GetComponent<BeatMovement>().SetLane(2);
-                }
-                else if (p2T2)
-                {
-                    instance = Instantiate(trash2Prefab, spawnPointP2.transform.position, spawnPointP2.transform.rotation);
-                    p2Obj.Add(instance);
-                    instance.GetComponent<BeatMovement>().SetLane(2);
-                }
-                else if (p2T3)
-                {
-                    instance = Instantiate(trash3Prefab, spawnPointP2.transform.position, spawnPointP2.transform.rotation);
-                    p3Obj.Add(instance);
-                    instance.GetComponent<BeatMovement>().SetLane(2);
-                }
-                else if (p2T4)
-                {
-                    instance = Instantiate(trash4Prefab, spawnPointP2.transform.position, spawnPointP2.transform.rotation);
-                    p4Obj.Add(instance);
-                    instance.GetComponent<BeatMovement>().SetLane(2);
-                }
+            else if (bossFight) {
+                instance = Instantiate(tentaclePrefab, spawnPointTentacles.transform.position, spawnPointTentacles.transform.rotation);
+                bossObj.Add(instance);
+                instance.GetComponent<BeatMovement>().SetLane(3);
             }
+            
 
             beatTimer -= bpmSpawn;
         }
         beatTimer += Time.deltaTime;
 
-        //if (Time.time >= time + raiseDifficultyTime)
-        //{
-        //    BossAttack();
-        //    changeDifficulty();
-        //    time = Time.time;
-        //}
+        if (Time.time >= time + raiseDifficultyTime)
+        {
+            //BossAttack();
+            //changeDifficulty();
+            bossFight = !bossFight;
+            time = Time.time;
+            //if (!bossFight) {
+            //    if (!round3) { 
+            //        changeDifficulty
+            //    }
+            //}
+        }
     }
 
     void changeDifficulty()
@@ -133,12 +152,12 @@ public class SpawnBasedOnBPM : MonoBehaviour
         }
     }
 
-    int generateRandom(int numOfDrums)
+    int generateRandom(int laneToSpawn)
     {
         int num = 0;
         float randNum = 0f;
 
-        if (numOfDrums == 2) { randNum = Random.Range(1.0f, 2.0f); }
+        if (laneToSpawn == 2) { randNum = Random.Range(1.0f, 2.0f); }
         if (randNum < 1.5)
         {
             num = 1;
@@ -153,65 +172,87 @@ public class SpawnBasedOnBPM : MonoBehaviour
     // Deletes note and returns number of points it was worth
     // Returns -1 on no deletion
     public int RemoveFromList(string objType) {
+
+        //Debug.Log("Remove From List Called");
+        
         GameObject instance;
 
         int points = -1;
 
-        if (objType == "1") {
+        if (objType == "Type1") {
+            //Debug.Log("Object is type 1");
             if (p1Obj.Count != 0)
             {
                 instance = p1Obj[0];
-                if (instance.GetComponent<BeatMovement>().GetCollectable()) {
-                    points = instance.GetComponent<BeatMovement>().GetPoints();
+                //Debug.Log("Instance = " + instance);
+                //if (instance.GetComponent<BeatMovement>().GetCollectable()) {
+                    //points = instance.GetComponent<BeatMovement>().GetPoints();
                     p1Obj.RemoveAt(0);
                     Destroy(instance);
                     return points;
-                }
+                //}
                 
             }
         }
-        else if (objType == "2")
+        else if (objType == "Type2")
         {
+            Debug.Log("Object is type 2");
             if (p2Obj.Count != 0)
             {
                 instance = p2Obj[0];
-                if (instance.GetComponent<BeatMovement>().GetCollectable())
-                {
-                    points = instance.GetComponent<BeatMovement>().GetPoints();
+                //Debug.Log("Instance = " + instance);
+                //if (instance.GetComponent<BeatMovement>().GetCollectable())
+                //{
+                    //points = instance.GetComponent<BeatMovement>().GetPoints();
                     p2Obj.RemoveAt(0);
                     Destroy(instance);
                     return points;
-                }
+                //}
 
             }
         }
-        else if (objType == "3")
+        else if (objType == "Type3")
         {
             if (p3Obj.Count != 0)
             {
                 instance = p3Obj[0];
-                if (instance.GetComponent<BeatMovement>().GetCollectable())
-                {
-                    points = instance.GetComponent<BeatMovement>().GetPoints();
+                //if (instance.GetComponent<BeatMovement>().GetCollectable())
+                //{
+                    //points = instance.GetComponent<BeatMovement>().GetPoints();
                     p3Obj.RemoveAt(0);
                     Destroy(instance);
                     return points;
-                }
+                //}
 
             }
         }
-        else if (objType == "4")
+        else if (objType == "Type4")
         {
             if (p4Obj.Count != 0)
             {
                 instance = p4Obj[0];
-                if (instance.GetComponent<BeatMovement>().GetCollectable())
-                {
-                    points = instance.GetComponent<BeatMovement>().GetPoints();
+                //if (instance.GetComponent<BeatMovement>().GetCollectable())
+                //{
+                    //points = instance.GetComponent<BeatMovement>().GetPoints();
                     p4Obj.RemoveAt(0);
                     Destroy(instance);
                     return points;
-                }
+                //}
+
+            }
+        }
+        else if (objType == "Boss")
+        {
+            if (bossObj.Count != 0)
+            {
+                instance = bossObj[0];
+                //if (instance.GetComponent<BeatMovement>().GetCollectable())
+                //{
+                //points = instance.GetComponent<BeatMovement>().GetPoints();
+                bossObj.RemoveAt(0);
+                Destroy(instance);
+                return points;
+                //}
 
             }
         }

@@ -16,6 +16,10 @@ TagManager:
   - Type4
   - L1EndPoint
   - L2EndPoint
+  - BossProjectile
+  - BossEndPoint
+  - StackUp
+  - StackDown
   layers:
   - Default
   - TransparentFX
