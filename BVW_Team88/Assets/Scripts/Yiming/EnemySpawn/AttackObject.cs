@@ -21,9 +21,10 @@ public class AttackObject : MonoBehaviour,Attackable
         timer += Time.deltaTime;
         if (setLane)
         {
-            Vector3 dir = targetPosition - this.transform.position + new Vector3(0, curve.Evaluate(timer), 0);
-            print(dir);
-            transform.position = transform.position + dir.normalized * speed * Time.deltaTime;
+            //Vector3 dir = targetPosition - this.transform.position + new Vector3(0, curve.Evaluate(timer), 0);
+            //print(dir);
+            //transform.position = transform.position + dir.normalized * speed * Time.deltaTime;
+            this.transform.position = Vector3.Lerp(this.transform.position, targetPosition, speed * Time.deltaTime);
         }
         else
         {
