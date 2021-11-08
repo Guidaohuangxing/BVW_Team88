@@ -13,6 +13,7 @@ public class SpawnBasedOnBPM : MonoBehaviour
     public GameObject player1, player2, stackUp;
     //public GameObject p1Weapon, p2Weapon, p3Weapon, p4Weapon, stackLower, stackHigher;
     public float raiseDifficultyTime = 20.0f;
+    public SoundFXManager sfxM; 
 
     private bool p1T1, p1T2, p1T3, p1T4, p2T1, p2T2, p2T3, p2T4=false;
     private bool round1, round2, round3=false;
@@ -120,6 +121,13 @@ public class SpawnBasedOnBPM : MonoBehaviour
 
         if (Time.time >= time + raiseDifficultyTime)
         {
+            if (!bossFight)
+            {
+                sfxM.PlayMonsterMad();
+            }
+            else if (bossFight) {
+                sfxM.PlayMonsterNormal();
+            }
             //BossAttack();
             //changeDifficulty();
             bossFight = !bossFight;
