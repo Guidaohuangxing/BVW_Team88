@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Spawn : MonoBehaviour
 {
+
+    public SoundFXManager soundFXManager;
+    
+    
     public float bpm = 96.0f;
     public float bpmRatio = 1.0f;
     public float bpmSpawn;
@@ -113,6 +117,16 @@ public class Spawn : MonoBehaviour
         if(DifficultChangeTimer > upperLaneTime[upperLaneTimerPointer])
         {
             isUpperLane = !isUpperLane;
+            if (isUpperLane)
+            {
+                bpmSpawn = SetBpmSpawn(bpm, rounds[1].bpmRatio);
+                soundFXManager.PlayMonsterMad();
+            }
+            else if (!isUpperLane)
+            {
+                bpmSpawn = SetBpmSpawn(bpm, rounds[0].bpmRatio);
+                soundFXManager.PlayMonsterNormal();
+            }
             DifficultChangeTimer = 0;
             upperLaneTimerPointer++;
         }

@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/TempStartScene.unity
     guid: 3d3287880d0d8ac4d9a7219ec55e4490
   - enabled: 1
-    path: Assets/Scenes/YimingScene.unity
+    path: Assets/Scenes/MainScene.unity
     guid: 5123f366d4328714994a37bd6aeae71f
   - enabled: 1
     path: Assets/Scenes/WinScene.unity

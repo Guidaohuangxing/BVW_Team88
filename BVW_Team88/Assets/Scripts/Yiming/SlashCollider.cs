@@ -19,8 +19,13 @@ public class SlashCollider : MonoBehaviour
             AttackObject ao = other.GetComponent<AttackObject>();
             if (ao.MatchType(p.tagName) && ao.MatchLane(p.position))
             {
+                FindObjectOfType<SoundFXManager>().PlaySliceSound();
                 FindObjectOfType<GameManager>().GetScore(ao.scoreAward);
                 CutThingsToNewMesh(other);
+                
+            }
+            else
+            {
                 
             }
            

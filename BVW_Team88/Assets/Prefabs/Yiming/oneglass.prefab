@@ -130,7 +130,7 @@ MonoBehaviour:
   tagName: 
   SpecificAttack: 0
   scoreAward: 3
-  speed: 2
+  speed: 3
   damage: 5
   targetPosition: {x: 0, y: 0, z: 0}
   attackable: 1
