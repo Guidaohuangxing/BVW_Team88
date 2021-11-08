@@ -26,7 +26,7 @@ public class SlashCollider : MonoBehaviour
             }
             else
             {
-                
+                FindObjectOfType<SoundFXManager>().PlayMiss();
             }
            
         }

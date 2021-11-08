@@ -66,7 +66,7 @@ public class AttackObject : MonoBehaviour,Attackable
         if(other.tag == "DamagePoint")
         {
             FindObjectOfType<GameManager>().GotDamage(damage);
-            FindObjectOfType<SoundFXManager>().PlayMiss();
+            FindObjectOfType<SoundFXManager>().PlayHit();
             Destroy(this.gameObject, 0.2f);
 
         }

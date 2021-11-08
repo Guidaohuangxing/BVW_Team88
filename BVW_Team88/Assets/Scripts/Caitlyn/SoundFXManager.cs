@@ -7,6 +7,7 @@ public class SoundFXManager : MonoBehaviour
     public AudioSource slice, hit, monster;
 
     public AudioClip monsterMad, monsterNormal, sliceNoise, hitByMonster;
+    public List<AudioClip> randomHit = new List<AudioClip>();
 
     public void PlayMonsterMad() {
         monster.PlayOneShot(monsterMad);
@@ -20,6 +21,12 @@ public class SoundFXManager : MonoBehaviour
     }
     public void PlayMiss() {
         hit.PlayOneShot(hitByMonster);
+    }
+
+    public void PlayHit()
+    {
+        int i = Random.Range(0, randomHit.Count);
+        hit.PlayOneShot(randomHit[i]);
     }
 
 }
