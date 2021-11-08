@@ -13,12 +13,16 @@ public class AttackObject : MonoBehaviour,Attackable
     public bool attackable = true;
     public bool setLane = false;
     public int lane = 0;
+    public AnimationCurve curve;
+    private float timer = 0;
 
     public void MoveToPlayer()
     {
+        timer += Time.deltaTime;
         if (setLane)
         {
-            Vector3 dir = targetPosition - this.transform.position;
+            Vector3 dir = targetPosition - this.transform.position + new Vector3(0, curve.Evaluate(timer), 0);
+            print(dir);
             transform.position = transform.position + dir.normalized * speed * Time.deltaTime;
         }
         else

@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour
 {
     public Text lifeTxt;
     public Text ScoreTxt;
-
+    public ManageScenes manageScenes;
     [System.Serializable]
     public class SwordArea
     {
@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
     private Player[] players = new Player[2];
     public GameObject playerParent;
 
-    
+    public bool musicEnd = false;
     public float pathsNum = 3;
     private void Start()
     {
@@ -47,6 +47,7 @@ public class GameManager : MonoBehaviour
         lifeTxt.text = "Total Life :" + life;
         ScoreTxt.text = "Score :" + score;
         CheckTwoPlayerPosition();
+        CheckEnding();
     }
     public void GotDamage(int damage)
     {
@@ -81,5 +82,16 @@ public class GameManager : MonoBehaviour
         players = playerParent.GetComponentsInChildren<Player>();
     }
 
+    private void CheckEnding()
+    {
+        if (life <= 0)
+        {
+            manageScenes.GoToLose();
+        }
+        else if(life>0 && musicEnd)
+        {
+            manageScenes.GoToWin();
+        }
+    }
 
 }

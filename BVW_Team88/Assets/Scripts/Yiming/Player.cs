@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
     private float timer =0;
     public float threshold = .1f;
     public string tagName;
+    
     private void Start()
     {
         gameManager = FindObjectOfType<GameManager>();

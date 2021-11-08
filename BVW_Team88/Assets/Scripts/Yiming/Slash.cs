@@ -9,6 +9,14 @@ public class Slash : MonoBehaviour
     public Queue<Vector3> pastPos  = new Queue<Vector3>();
     public int limitPos = 10;
     public List<GameObject> SlashColliders;
+    public float NewColliderTheshold = 0.1f;
+    private void Start()
+    {
+        foreach (var item in SlashColliders)
+        {
+            item.SetActive(false);
+        }
+    }
     public void SlashOrgin(Vector3 origin)
     {
         transform.position = origin;
@@ -25,39 +33,20 @@ public class Slash : MonoBehaviour
         //print(slashPos);
         if(pastPos.Count < limitPos)
         {
-            pastPos.Enqueue(slashPos);
-            Vector3[] poss = pastPos.ToArray();
-            if(poss.Length >= 2)
-            {
-                SlashColliders[newestSlashColliderNumber].SetActive(true);
-                GameObject go = SlashColliders[newestSlashColliderNumber];
-                go.transform.position = (poss[poss.Length - 1] + poss[poss.Length - 2]) / 2;
-                Vector3 dir = poss[poss.Length - 1] - poss[poss.Length - 2];
-                Quaternion rotateTo = Quaternion.FromToRotation(go.transform.up, dir);
-                //print(rotateTo);
-                go.transform.rotation = rotateTo * go.transform.rotation;
-                newestSlashColliderNumber++;
-            }
+            pastPos.Enqueue(slashPos); 
         }
         else if(pastPos.Count == limitPos)
         {
             pastPos.Dequeue();
-            
-            pastPos.Enqueue(slashPos);
-            Vector3[] poss = pastPos.ToArray();
-            SlashColliders[newestSlashColliderNumber].SetActive(true);
-            GameObject go = SlashColliders[newestSlashColliderNumber];
-            go.transform.position = (poss[poss.Length - 1] + poss[poss.Length - 2]) / 2;
-            Vector3 dir = poss[poss.Length - 1] - poss[poss.Length - 2];
-            Quaternion rotateTo = Quaternion.FromToRotation(go.transform.up, dir);
-            go.transform.rotation = rotateTo * go.transform.rotation;
-
-            newestSlashColliderNumber++;
+            pastPos.Enqueue(slashPos);  
         }
-        if(newestSlashColliderNumber == SlashColliders.Count)
+        Vector3[] poss = pastPos.ToArray();
+        if(Vector3.Distance(poss[poss.Length-1],poss[0])> NewColliderTheshold)
         {
-            newestSlashColliderNumber = 0;
+            newestSlashColliderNumber = ActivateSlashCollider(poss, newestSlashColliderNumber);
+            pastPos.Clear();
         }
+        
 
     }
     public void Destory()
@@ -70,5 +59,30 @@ public class Slash : MonoBehaviour
         this.gameObject.SetActive(false);
     }
 
-    
+
+
+    /// <summary>
+    /// use a pooling of collider to cut things
+    /// </summary>
+    /// <param name="previousPosition"></param>
+    public int ActivateSlashCollider(Vector3[] previousPosition,int newestSlashColliderPointer)
+    {
+        
+        if (previousPosition.Length >= 2)
+        {
+            SlashColliders[newestSlashColliderPointer].SetActive(true);
+            GameObject go = SlashColliders[newestSlashColliderPointer];
+            go.transform.position = (previousPosition[previousPosition.Length - 1] + previousPosition[0]) / 2;
+            Vector3 dir = previousPosition[previousPosition.Length - 1] - previousPosition[0];
+            Quaternion rotateTo = Quaternion.FromToRotation(go.transform.up, dir);
+            //print(rotateTo);
+            go.transform.rotation = rotateTo * go.transform.rotation;
+            newestSlashColliderPointer++;
+        }
+        if (newestSlashColliderPointer == SlashColliders.Count)
+        {
+            newestSlashColliderPointer = 0;
+        }
+        return newestSlashColliderPointer;
+    }
 }

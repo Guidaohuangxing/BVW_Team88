@@ -98,7 +98,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isSolid: 1
   _reverseWindTriangles: 0
-  _useGravity: 0
+  _useGravity: 1
   _shareVertices: 0
   _smoothVertices: 0
 --- !u!136 &6309174536442202576
@@ -136,3 +136,36 @@ MonoBehaviour:
   attackable: 1
   setLane: 0
   lane: 0
+  curve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.023590088
+      inSlope: 1.9284711
+      outSlope: 1.9284711
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.48843572
+      value: 0.96552426
+      inSlope: 0.054042637
+      outSlope: 0.054042637
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1.0214233
+      value: -0.0047187805
+      inSlope: -1.8203858
+      outSlope: -1.8203858
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4

@@ -30,6 +30,8 @@ public class Spawn : MonoBehaviour
     public int roundPointer = 0;
     public List<float> upperLaneTime;
 
+
+    private float musicTimer = 0;//to calculate if we need to end the game
     private float timer = 0;//time counter
     private float DifficultChangeTimer = 0;
     private bool isUpperLane = false;
@@ -42,7 +44,12 @@ public class Spawn : MonoBehaviour
 
     private void Update()
     {
+        musicTimer += Time.deltaTime;
         timer += Time.deltaTime;
+        if(musicTimer >= this.GetComponent<AudioSource>().clip.length)
+        {
+            FindObjectOfType<GameManager>().musicEnd = true;
+        }
         DifficultChangeTimer += Time.deltaTime;
         if (timer >= bpmSpawn)
         {
