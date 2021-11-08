@@ -57,6 +57,10 @@ public class GameManager : MonoBehaviour
     {
         score += s;
     }
+
+    /// <summary>
+    /// simple check will polish that later
+    /// </summary>
     public void CheckTwoPlayerPosition()
     {
        if( players[0].position == players[1].position)
@@ -65,6 +69,7 @@ public class GameManager : MonoBehaviour
             players[0].isRide = true;
             players[0].SwordStartPosition = upperSwordAreas[upperPosition].swordPos.position;
             players[0].transform.position = upperSwordAreas[upperPosition].playerPos.position;
+            players[0].position = upperSwordAreas[upperPosition].number;
         }
         else
         {
@@ -75,4 +80,6 @@ public class GameManager : MonoBehaviour
     {
         players = playerParent.GetComponentsInChildren<Player>();
     }
+
+
 }

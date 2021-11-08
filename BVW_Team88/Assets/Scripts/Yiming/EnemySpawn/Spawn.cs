@@ -56,7 +56,7 @@ public class Spawn : MonoBehaviour
             else
             {
                 SpawnObjects(upperLanes);
-                isUpperLane = false;
+                //isUpperLane = false;
             }
             timer = 0;
         }
@@ -73,8 +73,7 @@ public class Spawn : MonoBehaviour
         bpmRatio = rounds[roundPointer].bpmRatio;
         bpmSpawn = SetBpmSpawn(bpm, bpmRatio);
         allSpawnObjects.Clear();
-        ResetLanesNumber(lanes);
-        ResetLanesNumber(upperLanes);
+      
     }
     private float SetBpmSpawn(float bpm, float bpmRatio)
     {
@@ -82,13 +81,7 @@ public class Spawn : MonoBehaviour
         return bpmspawn;
     }
 
-    public void ResetLanesNumber(List<Lane> lanes)
-    {
-        for(int i=0;i< lanes.Count; i++)
-        {
-            lanes[i].LaneNum = i;
-        }
-    }
+    
 
     /// <summary>
     /// use to spawn objects
@@ -99,7 +92,7 @@ public class Spawn : MonoBehaviour
         int spawnObjectPointer = Random.Range(0, spawnObjects.Count);
         GameObject go = Instantiate(spawnObjects[spawnObjectPointer], lanes[lanesPointer].startPos.position, Quaternion.identity);
         go.GetComponent<AttackObject>().targetPosition = lanes[lanesPointer].endPos.position;
-        go.GetComponent<AttackObject>().lane = lanesPointer;
+        go.GetComponent<AttackObject>().lane = lanes[lanesPointer].LaneNum;//give the upper lane different lane num
         go.GetComponent<AttackObject>().setLane = true;
         allSpawnObjects.Add(go);
     }
@@ -112,7 +105,7 @@ public class Spawn : MonoBehaviour
         }
         if(DifficultChangeTimer > upperLaneTime[upperLaneTimerPointer])
         {
-            isUpperLane = true;
+            isUpperLane = !isUpperLane;
             DifficultChangeTimer = 0;
             upperLaneTimerPointer++;
         }
