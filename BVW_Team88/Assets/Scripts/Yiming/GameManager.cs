@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
+    public Text lifeTxt;
+    public Text ScoreTxt;
+
     [System.Serializable]
     public class SwordArea
     {
@@ -12,8 +15,8 @@ public class GameManager : MonoBehaviour
         public float rightX;
         public float highY;
         public float lowY;
-        public Vector3 swordPos;
-        public Vector3 playerPos;
+        public Transform swordPos;
+        public Transform playerPos;
         public bool InArea(Vector3 point)
         {
             if (point.x < rightX && point.x > leftX)
@@ -25,34 +28,51 @@ public class GameManager : MonoBehaviour
     }
 
     public List<SwordArea> swordAreas = new List<SwordArea>();
+    public List<SwordArea> upperSwordAreas = new List<SwordArea>();
 
-    public float playerPosLength = 5;
-    public float cameraLength = 2;
-    public float pathsNum = 3;
-    public float cameraHigh = 3;
+    public int life = 100;
+    public int score = 0;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        float startX = - cameraLength / 2;
-        float posX = -playerPosLength / 2;
-        for (int i = 0; i < pathsNum; i++)
-        {
-            SwordArea area = new SwordArea();
-            area.number = i;
-            area.leftX = startX;
-            startX += cameraLength / pathsNum;
-            area.rightX = startX;
-            area.lowY = 0;
-            area.highY = area.lowY + cameraHigh;
-            float lx = posX;
-            posX += playerPosLength / pathsNum;
-            float rx = posX;
-            area.swordPos = new Vector3((rx + lx) * 2 / 4, (area.lowY + area.highY) * 2f / 4, -14);
-            area.playerPos = new Vector3((rx + lx) * 2 / 4, (area.lowY + area.highY) * 0, -15);
-            swordAreas.Add(area);
-        }
-    }
+    private Player[] players = new Player[2];
+    public GameObject playerParent;
 
     
+    public float pathsNum = 3;
+    private void Start()
+    {
+        Initialized();
+    }
+    private void Update()
+    {
+        lifeTxt.text = "Total Life :" + life;
+        ScoreTxt.text = "Score :" + score;
+        CheckTwoPlayerPosition();
+    }
+    public void GotDamage(int damage)
+    {
+        life -= damage;
+    }
+    
+    public void GetScore(int s)
+    {
+        score += s;
+    }
+    public void CheckTwoPlayerPosition()
+    {
+       if( players[0].position == players[1].position)
+        {
+            int upperPosition = players[0].position;
+            players[0].isRide = true;
+            players[0].SwordStartPosition = upperSwordAreas[upperPosition].swordPos.position;
+            players[0].transform.position = upperSwordAreas[upperPosition].playerPos.position;
+        }
+        else
+        {
+            players[0].isRide = false;
+        }
+    }
+    private void Initialized()
+    {
+        players = playerParent.GetComponentsInChildren<Player>();
+    }
 }

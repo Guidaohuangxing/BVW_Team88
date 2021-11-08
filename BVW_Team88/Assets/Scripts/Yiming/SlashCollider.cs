@@ -17,9 +17,11 @@ public class SlashCollider : MonoBehaviour
             other.GetComponent<AttackObject>().attackable = false;
             Player p = GetComponentInParent<Player>();
             AttackObject ao = other.GetComponent<AttackObject>();
-            if (ao.MatchType(p.tagName))
+            if (ao.MatchType(p.tagName) && ao.MatchLane(p.position))
             {
+                FindObjectOfType<GameManager>().GetScore(ao.scoreAward);
                 CutThingsToNewMesh(other);
+                
             }
            
         }

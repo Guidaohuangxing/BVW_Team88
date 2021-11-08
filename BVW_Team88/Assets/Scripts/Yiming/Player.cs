@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public bool isRide = false;//when two player at the same place;
     public Transform tracker;
     GameManager gameManager;
     public int position;
@@ -38,11 +39,18 @@ public class Player : MonoBehaviour
                 if (item.InArea(tracker.position))
                 {
                     position = item.number;
-                    SwordStartPosition = item.swordPos;
-                    transform.position = item.playerPos;
+                    if (!isRide)
+                    {
+                        SwordStartPosition = item.swordPos.position;
+                        transform.position = item.playerPos.position;
+
+                    }
+                    
                 }
             }
         }
     }
+
+ 
 
 }

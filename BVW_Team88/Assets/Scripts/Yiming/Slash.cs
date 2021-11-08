@@ -22,6 +22,7 @@ public class Slash : MonoBehaviour
     {
         trackerPos = Vector3.ProjectOnPlane(trackerPos, new Vector3(0, 0, 1));
         Vector3 slashPos = trackerPos - offset;
+        //print(slashPos);
         if(pastPos.Count < limitPos)
         {
             pastPos.Enqueue(slashPos);

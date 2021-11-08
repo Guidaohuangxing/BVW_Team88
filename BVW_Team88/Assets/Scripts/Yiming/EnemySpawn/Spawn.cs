@@ -99,13 +99,14 @@ public class Spawn : MonoBehaviour
         int spawnObjectPointer = Random.Range(0, spawnObjects.Count);
         GameObject go = Instantiate(spawnObjects[spawnObjectPointer], lanes[lanesPointer].startPos.position, Quaternion.identity);
         go.GetComponent<AttackObject>().targetPosition = lanes[lanesPointer].endPos.position;
+        go.GetComponent<AttackObject>().lane = lanesPointer;
         go.GetComponent<AttackObject>().setLane = true;
         allSpawnObjects.Add(go);
     }
 
     public int ChangeDifficult(int upperLaneTimerPointer)
     {
-        if(upperLaneTimerPointer > upperLaneTime.Count)
+        if(upperLaneTimerPointer >= upperLaneTime.Count)
         {
             upperLaneTimerPointer = upperLaneTime.Count - 1;
         }
@@ -126,7 +127,7 @@ public class Spawn : MonoBehaviour
     {
         foreach(var item in allSpawnObjects)
         {
-            item.GetComponent<AttackObject>().MoveToPlayer();
+            if (item != null) { item.GetComponent<AttackObject>().MoveToPlayer(); }
         }
     }
 }

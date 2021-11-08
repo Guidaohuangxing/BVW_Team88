@@ -12,6 +12,7 @@ public class AttackObject : MonoBehaviour,Attackable
     public Vector3 targetPosition;
     public bool attackable = true;
     public bool setLane = false;
+    public int lane = 0;
 
     public void MoveToPlayer()
     {
@@ -43,5 +44,25 @@ public class AttackObject : MonoBehaviour,Attackable
             if(tagName == playerType) { return true; }
         }
         return false;
+    }
+
+    public bool MatchLane(int PlayerLane)
+    {
+        if(lane == PlayerLane)
+        {
+            return true;
+        }
+        return false;
+    }
+
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "DamagePoint")
+        {
+            FindObjectOfType<GameManager>().GotDamage(damage);
+            Destroy(this.gameObject, 0.2f);
+
+        }
     }
 }

@@ -36,12 +36,15 @@ public class Sword : MonoBehaviour
 
     public float speedTimer = 0.05f;
     private float speedTime = 0;
+
+    public GameObject ParticleTrail;
     private void Start()
     {
         Initialized();
     }
     private void Update()
     {
+        //print(transform.TransformPoint(currentPos));
         speedTime += Time.deltaTime;
         if(speedTime >= speedTimer)
         {
@@ -57,21 +60,25 @@ public class Sword : MonoBehaviour
             }
             previousPos = currentPos;
             speedTime = 0f;
-            print(slashing);
+            //print(slashing);
+           
         }
-        
-
         if (slashing)
         {
+            //currentSlash.UpadateSlash(transform.TransformPoint(currentPos), slashOffset);
             slashTimer += Time.deltaTime;
-            if(slashTimer >(1/ UpdateInterval))
+            if (slashTimer > (1 / UpdateInterval))
             {
                 currentSlash.UpadateSlash(transform.TransformPoint(currentPos), slashOffset);
                 slashTimer = 0;
             }
+            //Vector3 dir = transform.TransformPoint(currentPos) - slashOffset - ParticleTrail.transform.position;
+            ParticleTrail.GetComponent<Rigidbody>().MovePosition(Vector3.ProjectOnPlane(transform.TransformPoint(currentPos), normalPlane) - slashOffset);
         }
-      
-       
+
+
+
+
 
     }
 
@@ -82,17 +89,23 @@ public class Sword : MonoBehaviour
         previousPos = currentPos;
         gameManager = FindObjectOfType<GameManager>();
         player = GetComponentInParent<Player>();
+        ParticleTrail.SetActive(false);
       
     }
     public void StartSlash()
     {
-        print("StartSlash");
+        //print("StartSlash");
         slashing = true;
         SlashPrefab.SetActive(true);
         currentSlash = SlashPrefab.GetComponent<Slash>();
         currentSlash.SlashOrgin(player.SwordStartPosition);
         slashOffset = Vector3.ProjectOnPlane(transform.TransformPoint(currentPos), normalPlane) - player.SwordStartPosition;
         currentSlash.UpadateSlash(transform.TransformPoint(currentPos), slashOffset);
+        ParticleTrail.SetActive(true);
+        print(transform.TransformPoint(currentPos));
+        print(transform.TransformPoint(currentPos) - slashOffset);
+        ParticleTrail.transform.position = Vector3.ProjectOnPlane(transform.TransformPoint(currentPos), normalPlane) - slashOffset;
+        
     }
     public void EndSlash()
     {
@@ -100,6 +113,7 @@ public class Sword : MonoBehaviour
         slashing = false;
         currentSlash.Destory();
         slashTimer = 0;
+        ParticleTrail.SetActive(false);
     }
     
 }
