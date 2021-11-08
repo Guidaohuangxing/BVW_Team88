@@ -44,11 +44,12 @@ public class Sword : MonoBehaviour
     }
     private void Update()
     {
-        //print(transform.TransformPoint(currentPos));
+       
         speedTime += Time.deltaTime;
         if(speedTime >= speedTimer)
         {
-            currentPos = swordTracker.InverseTransformPoint(transform.position + transform.forward * swordLength);
+            //currentPos = swordTracker.InverseTransformPoint(swordTracker.transform.position + swordTracker.transform.forward * swordLength);
+            currentPos = swordTracker.transform.position + swordTracker.transform.forward * swordLength;
             speed = Mathf.Clamp((currentPos - previousPos).magnitude / speedTime, 0, 300);
             if (speed > minSpeed && !slashing)
             {
@@ -65,15 +66,15 @@ public class Sword : MonoBehaviour
         }
         if (slashing)
         {
-            //currentSlash.UpadateSlash(transform.TransformPoint(currentPos), slashOffset);
+            
             slashTimer += Time.deltaTime;
             if (slashTimer > (1 / UpdateInterval))
             {
-                currentSlash.UpadateSlash(transform.TransformPoint(currentPos), slashOffset);
+                //currentSlash.UpadateSlash(transform.TransformPoint(currentPos), slashOffset);
+                currentSlash.UpadateSlash(currentPos, slashOffset);
                 slashTimer = 0;
             }
-            //Vector3 dir = transform.TransformPoint(currentPos) - slashOffset - ParticleTrail.transform.position;
-            ParticleTrail.GetComponent<Rigidbody>().MovePosition(Vector3.ProjectOnPlane(transform.TransformPoint(currentPos), normalPlane) - slashOffset);
+            ParticleTrail.GetComponent<Rigidbody>().MovePosition(Vector3.ProjectOnPlane(currentPos, normalPlane) - slashOffset);
         }
 
 
@@ -85,11 +86,13 @@ public class Sword : MonoBehaviour
 
     private void Initialized()
     {
-         currentPos = swordTracker.InverseTransformPoint(transform.position + transform.forward * swordLength);
+        // currentPos = swordTracker.InverseTransformPoint(swordTracker.transform.position + swordTracker.transform.forward * swordLength);
+        currentPos = swordTracker.transform.position + swordTracker.transform.forward * swordLength;
         previousPos = currentPos;
         gameManager = FindObjectOfType<GameManager>();
         player = GetComponentInParent<Player>();
         ParticleTrail.SetActive(false);
+        
       
     }
     public void StartSlash()
@@ -99,12 +102,13 @@ public class Sword : MonoBehaviour
         SlashPrefab.SetActive(true);
         currentSlash = SlashPrefab.GetComponent<Slash>();
         currentSlash.SlashOrgin(player.SwordStartPosition);
-        slashOffset = Vector3.ProjectOnPlane(transform.TransformPoint(currentPos), normalPlane) - player.SwordStartPosition;
-        currentSlash.UpadateSlash(transform.TransformPoint(currentPos), slashOffset);
+        slashOffset = Vector3.ProjectOnPlane(currentPos, normalPlane) - player.SwordStartPosition;
+        
+        currentSlash.UpadateSlash(currentPos, slashOffset);
         ParticleTrail.SetActive(true);
-        print(transform.TransformPoint(currentPos));
-        print(transform.TransformPoint(currentPos) - slashOffset);
-        ParticleTrail.transform.position = Vector3.ProjectOnPlane(transform.TransformPoint(currentPos), normalPlane) - slashOffset;
+        print(currentPos);
+        print(currentPos - slashOffset);
+        ParticleTrail.transform.position = Vector3.ProjectOnPlane(currentPos, normalPlane) - slashOffset;
         
     }
     public void EndSlash()
