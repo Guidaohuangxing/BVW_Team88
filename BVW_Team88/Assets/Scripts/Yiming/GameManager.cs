@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
         public Transform playerPos;
         public bool InArea(Vector3 point)
         {
-            if (point.x < rightX && point.x >= leftX)
+            if (point.x < rightX && point.x > leftX)
             {
                 return true;
             }
