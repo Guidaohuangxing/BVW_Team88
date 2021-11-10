@@ -6,7 +6,7 @@ public class SoundFXManager : MonoBehaviour
 {
     public AudioSource slice, hit, monster;
 
-    public AudioClip monsterMad, monsterNormal, sliceNoise, hitByMonster;
+    public AudioClip monsterMad, monsterNormal, monsterDeath, monsterHurt, sliceNoise, hitByMonster;
     public List<AudioClip> randomHit = new List<AudioClip>();
 
     public void PlayMonsterMad() {
@@ -15,6 +15,14 @@ public class SoundFXManager : MonoBehaviour
     public void PlayMonsterNormal()
     {
         monster.PlayOneShot(monsterNormal);
+    }
+    public void PlayMonsterDeath()
+    {
+        monster.PlayOneShot(monsterDeath);
+    }
+    public void PlayMonsterHurt()
+    {
+        monster.PlayOneShot(monsterHurt);
     }
     public void PlaySliceSound() {
         slice.PlayOneShot(sliceNoise);
@@ -29,4 +37,11 @@ public class SoundFXManager : MonoBehaviour
         hit.PlayOneShot(randomHit[i]);
     }
 
+    /* public void PlayComboSound() { 
+         combo.PlayOneShot(comboClip);
+     }
+     public void PlaySuperCombo() { 
+         combo.PlayOneShot(superComboClip);
+     }
+     */
 }
