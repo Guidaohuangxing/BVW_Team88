@@ -1,57 +1,161 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using TMPro;
+using UnityEngine.UI;
 public class Player : MonoBehaviour
 {
+    public enum State
+    {
+        Dying,//almost dead still can heal
+        Alive,
+        PowerUp//when get enought combo can fight with other and use Trick
+    }
+
+    public State playerState = State.Alive;
+    public int dyingHealth = -30; //when player in dying mode how many heal they have;
     public bool isRide = false;//when two player at the same place;
     public Transform tracker;
     GameManager gameManager;
     public int position;
     public Vector3 SwordStartPosition;
     public Sword childSword;
-    private float timer =0;
+    private float timer = 0;
     public float threshold = .1f;
     public string tagName;
-    
+
+    public int MaxHealth = 100;
+    [SerializeField]
+    private int health = 100;
+    [SerializeField]
+    private int combo = 0;
+   
+
+
+
+
+    public TextMeshProUGUI comboTxt;
+    public Image HPbar;
     private void Start()
     {
+        health = MaxHealth;
         gameManager = FindObjectOfType<GameManager>();
-        
+        SetPlayerPosition();
     }
     private void Update()
     {
-        timer += Time.deltaTime;
-        if(timer>= threshold)
-        {
-            UpdatePosition();
-            timer = 0;
-        }
-        print("excutive this");
+        CheckEnterDying();
     }
 
-    public void UpdatePosition()
-    {
-        if (!childSword.slashing)
-        {
-            //print("track area" + tracker.position);
-            foreach(var item in gameManager.swordAreas)
-            {
-                if (item.InArea(tracker.position))
-                {
-                    position = item.number;
-                    if (!isRide)
-                    {
-                        SwordStartPosition = item.swordPos.position;
-                        transform.position = item.playerPos.position;
 
-                    }
-                    
-                }
+    public void SetPlayerPosition()
+    {
+        foreach (var item in gameManager.swordAreas)
+        {
+            if (item.number == position)
+            {
+                SwordStartPosition = item.swordPos.position;
+                transform.position = item.playerPos.position;
             }
         }
     }
 
- 
+    /// <summary>
+    /// Enter the state of dying can not slash anymore and need other player's help
+    /// </summary>
+    public void CheckEnterDying()
+    {
+        if (health < 0 && playerState == State.Alive)
+        {
+            health = dyingHealth;
+            playerState = State.Dying;
+        }
+        else if(health > 0 && playerState == State.Dying)
+        {
+            playerState = State.Alive;
+        }
+        
+    }
 
+    //public void UpdatePosition()
+    //{
+    //    if (!childSword.slashing)
+    //    {
+    //        //print("track area" + tracker.position);
+    //        foreach(var item in gameManager.swordAreas)
+    //        {
+    //            if (item.InArea(tracker.position))
+    //            {
+    //                position = item.number;
+    //                if (!isRide)
+    //                {
+    //                    SwordStartPosition = item.swordPos.position;
+    //                    transform.position = item.playerPos.position;
+
+    //                }
+
+    //            }
+    //        }
+    //    }
+    //}
+
+    /// <summary>
+    /// when was hit, get damage and reset the combo
+    /// </summary>
+    /// <param name="damage"></param>
+    public void TakeDamage(int damage)
+    {
+        if(health >= 0)
+        {
+            health -= damage;
+        }    
+        combo = 0;
+        comboTxt.text = combo.ToString();
+        HPbar.fillAmount = (float)health / MaxHealth;
+    }
+
+
+    public void TakeHeal(int heal)
+    {
+        if(health + heal <= MaxHealth)
+        {
+            health += heal;
+        }
+        GetCombo();
+        HPbar.fillAmount = (float)health / MaxHealth;
+    }
+    /// <summary>
+    /// cut thing in combo
+    /// </summary>
+    public void GetCombo()
+    {
+        combo++;
+        comboTxt.text = combo + "Combo";
+        if (combo >= 2)
+        {
+            print("combo!");
+        }
+        else if (combo >= 10)
+        {
+            print("nice combo!");
+        }
+        else if (combo >= 30)
+        {
+            print("super combo!");
+        }
+        else if (combo >= 50)
+        {
+            print("crazzzzzy combo!");
+            playerState = State.PowerUp;
+        }
+
+
+    }
+
+
+    public int Health
+    {
+        get { return health; }
+        set { health = value; }
+    }
 }

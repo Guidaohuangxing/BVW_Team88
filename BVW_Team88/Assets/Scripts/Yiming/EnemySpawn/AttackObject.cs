@@ -11,19 +11,20 @@ public class AttackObject : MonoBehaviour,Attackable
     public int damage = 5;
     public Vector3 targetPosition;
     public bool attackable = true;
+    public bool canCauseDamage = true;
     public bool setLane = false;
     public int lane = 0;
     public AnimationCurve curve;
     private float timer = 0;
 
+    /// <summary>
+    /// need more polish for that moving 
+    /// </summary>
     public void MoveToPlayer()
     {
         timer += Time.deltaTime;
         if (setLane)
         {
-            //Vector3 dir = targetPosition - this.transform.position + new Vector3(0, curve.Evaluate(timer), 0);
-            //print(dir);
-            //transform.position = transform.position + dir.normalized * speed * Time.deltaTime;
             this.transform.position = Vector3.Lerp(this.transform.position, targetPosition, speed * Time.deltaTime);
         }
         else
@@ -60,15 +61,8 @@ public class AttackObject : MonoBehaviour,Attackable
         return false;
     }
 
-
-    private void OnTriggerEnter(Collider other)
+    public virtual void HitPlayer()
     {
-        if(other.tag == "DamagePoint")
-        {
-            FindObjectOfType<GameManager>().GotDamage(damage);
-            FindObjectOfType<SoundFXManager>().PlayHit();
-            Destroy(this.gameObject, 0.2f);
-
-        }
+        print("Cause Damage");
     }
 }

@@ -18,6 +18,7 @@ public class Spawn : MonoBehaviour
         public int LaneNum;
         public Transform startPos;
         public Transform endPos;
+        public float objectSpeed;
     }
     [System.Serializable]
     public class Round
@@ -50,10 +51,7 @@ public class Spawn : MonoBehaviour
     {
         musicTimer += Time.deltaTime;
         timer += Time.deltaTime;
-        if(musicTimer >= this.GetComponent<AudioSource>().clip.length)
-        {
-            FindObjectOfType<GameManager>().musicEnd = true;
-        }
+
         DifficultChangeTimer += Time.deltaTime;
         if (timer >= bpmSpawn)
         {
@@ -73,7 +71,7 @@ public class Spawn : MonoBehaviour
         }
 
         MoveAllObjects();
-        upperLaneTimerPointer = ChangeDifficult(upperLaneTimerPointer);
+        //upperLaneTimerPointer = ChangeDifficult(upperLaneTimerPointer);
     }
 
     /// <summary>
@@ -105,6 +103,10 @@ public class Spawn : MonoBehaviour
         go.GetComponent<AttackObject>().targetPosition = lanes[lanesPointer].endPos.position;
         go.GetComponent<AttackObject>().lane = lanes[lanesPointer].LaneNum;//give the upper lane different lane num
         go.GetComponent<AttackObject>().setLane = true;
+        if(lanes[lanesPointer].objectSpeed != 0)
+        {
+            go.GetComponent<AttackObject>().speed = lanes[lanesPointer].objectSpeed;
+        }
         allSpawnObjects.Add(go);
     }
 

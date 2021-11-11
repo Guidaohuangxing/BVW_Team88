@@ -14,13 +14,14 @@ public class SlashCollider : MonoBehaviour
         //print("cut things");
         if(attackable != null && other.GetComponent<AttackObject>().attackable)
         {
-            other.GetComponent<AttackObject>().attackable = false;
+            other.GetComponent<AttackObject>().attackable = false;//can't  cut again
             Player p = GetComponentInParent<Player>();
             AttackObject ao = other.GetComponent<AttackObject>();
             if (ao.MatchType(p.tagName) && ao.MatchLane(p.position))
             {
                 FindObjectOfType<SoundFXManager>().PlaySliceSound();
                 FindObjectOfType<GameManager>().GetScore(ao.scoreAward);
+                p.GetCombo();
                 CutThingsToNewMesh(other);
                 
             }

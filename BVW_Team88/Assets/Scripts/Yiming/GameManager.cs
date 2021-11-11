@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
-    public Text lifeTxt;
+    //public Text lifeTxt;
     public Text ScoreTxt;
     public ManageScenes manageScenes;
     [System.Serializable]
@@ -36,17 +36,20 @@ public class GameManager : MonoBehaviour
     private Player[] players = new Player[2];
     public GameObject playerParent;
 
-    public bool musicEnd = false;
     public float pathsNum = 3;
+
+    public bool isWin = false;
+
+
     private void Start()
     {
         Initialized();
     }
     private void Update()
     {
-        lifeTxt.text = "Total Life :" + life;
+        //lifeTxt.text = "Total Life :" + life;
         ScoreTxt.text = "Score :" + score;
-        CheckTwoPlayerPosition();
+        //CheckTwoPlayerPosition();
         CheckEnding();
     }
     public void GotDamage(int damage)
@@ -59,24 +62,36 @@ public class GameManager : MonoBehaviour
         score += s;
     }
 
-    /// <summary>
-    /// simple check will polish that later
-    /// </summary>
-    public void CheckTwoPlayerPosition()
+
+    public bool CheckTwoPlayersHealth()
     {
-       if( players[0].position == players[1].position)
+        if(players[0].Health<=0 && players[1].Health <= 0)
         {
-            int upperPosition = players[0].position;
-            players[0].isRide = true;
-            players[0].SwordStartPosition = upperSwordAreas[upperPosition].swordPos.position;
-            players[0].transform.position = upperSwordAreas[upperPosition].playerPos.position;
-            players[0].position = upperSwordAreas[upperPosition].number;
+            return true;
         }
-        else
-        {
-            players[0].isRide = false;
-        }
+        return false;
     }
+
+
+
+    ///// <summary>
+    ///// simple check will polish that later
+    ///// </summary>
+    //public void CheckTwoPlayerPosition()
+    //{
+    //   if( players[0].position == players[1].position)
+    //    {
+    //        int upperPosition = players[0].position;
+    //        players[0].isRide = true;
+    //        players[0].SwordStartPosition = upperSwordAreas[upperPosition].swordPos.position;
+    //        players[0].transform.position = upperSwordAreas[upperPosition].playerPos.position;
+    //        players[0].position = upperSwordAreas[upperPosition].number;
+    //    }
+    //    else
+    //    {
+    //        players[0].isRide = false;
+    //    }
+    //}
     private void Initialized()
     {
         players = playerParent.GetComponentsInChildren<Player>();
@@ -84,14 +99,17 @@ public class GameManager : MonoBehaviour
 
     private void CheckEnding()
     {
-        if (life <= 0)
+        //use two players health to decide when to died
+        if (CheckTwoPlayersHealth())
         {
             manageScenes.GoToLose();
         }
-        else if(life>0 && musicEnd)
+        else if (isWin)
         {
             manageScenes.GoToWin();
         }
+       
+      
     }
 
 }
