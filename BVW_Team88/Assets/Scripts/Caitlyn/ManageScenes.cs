@@ -5,6 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class ManageScenes : MonoBehaviour
 {
+    public PlayerHealth ph1, ph2;
+
+    public bool p1Dead, p2Dead = false;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -14,7 +18,6 @@ public class ManageScenes : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
     }
 
     public void GoToStart() {

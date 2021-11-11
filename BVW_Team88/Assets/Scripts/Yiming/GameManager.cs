@@ -112,4 +112,15 @@ public class GameManager : MonoBehaviour
       
     }
 
+    //void CheckIfDead()
+    //{
+    //    p1Dead = ph1.CheckHealth();
+    //    p2Dead = ph2.CheckHealth();
+
+    //    if (p1Dead && p2Dead)
+    //    {
+    //        manageScenes.GoToLose();
+    //    }
+
+    //}
 }

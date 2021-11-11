@@ -24,6 +24,8 @@ public class Player : MonoBehaviour
     public float threshold = .1f;
     public string tagName;
 
+    public Slider healthBar;
+    public Text healthVal;
     public int MaxHealth = 100;
     [SerializeField]
     private int health = 100;
@@ -35,7 +37,6 @@ public class Player : MonoBehaviour
 
 
     public TextMeshProUGUI comboTxt;
-    public Image HPbar;
     private void Start()
     {
         health = MaxHealth;
@@ -108,10 +109,12 @@ public class Player : MonoBehaviour
         if(health >= 0)
         {
             health -= damage;
-        }    
+        }
+        healthBar.value = health;
+        healthVal.text = health + "/"+MaxHealth;
         combo = 0;
         comboTxt.text = combo.ToString();
-        HPbar.fillAmount = (float)health / MaxHealth;
+        
     }
 
 
@@ -122,7 +125,8 @@ public class Player : MonoBehaviour
             health += heal;
         }
         GetCombo();
-        HPbar.fillAmount = (float)health / MaxHealth;
+        healthBar.value = health;
+        healthVal.text = health + "/" + MaxHealth;
     }
     /// <summary>
     /// cut thing in combo
@@ -157,5 +161,14 @@ public class Player : MonoBehaviour
     {
         get { return health; }
         set { health = value; }
+    }
+
+    public bool CheckHealth()
+    {
+        if (health <= 0)
+        {
+            return true;
+        }
+        else { return false; }
     }
 }
