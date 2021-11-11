@@ -53,41 +53,41 @@ public class Sword : MonoBehaviour
     }
     private void Update()
     {
-        RecordSwordPosition();
-        speedTime += Time.deltaTime;
-        if(speedTime >= speedTimer)
+        if(player.playerState == Player.State.Alive || player.playerState == Player.State.PowerUp)
         {
-            currentPos = swordTracker.transform.position + swordTracker.transform.forward * swordLength;
-            speed = Mathf.Clamp((currentPos - previousPos).magnitude / speedTime, 0, 300);
-            if (speed > minSpeed && !slashing)
+            RecordSwordPosition();
+            speedTime += Time.deltaTime;
+            if (speedTime >= speedTimer)
             {
-                StartSlash();
+                currentPos = swordTracker.transform.position + swordTracker.transform.forward * swordLength;
+                speed = Mathf.Clamp((currentPos - previousPos).magnitude / speedTime, 0, 300);
+                if (speed > minSpeed && !slashing)
+                {
+                    StartSlash();
+                }
+                else if (speed <= minSpeed && slashing)
+                {
+                    EndSlash();
+                }
+                previousPos = currentPos;
+                speedTime = 0f;
+                //print(slashing);
+
             }
-            else if (speed <= minSpeed && slashing)
+            if (slashing)
             {
-                EndSlash();
+
+                slashTimer += Time.deltaTime;
+                if (slashTimer > (1 / UpdateInterval))
+                {
+                    UpdateSwordSpritePosition(currentPos, swordSpriteCurrentPos);
+                    currentSlash.UpadateSlash(currentPos, slashOffset);
+                    slashTimer = 0;
+                }
+                ParticleTrail.GetComponent<Rigidbody>().MovePosition(Vector3.ProjectOnPlane(currentPos, normalPlane) - slashOffset);
             }
-            previousPos = currentPos;
-            speedTime = 0f;
-            //print(slashing);
-           
         }
-        if (slashing)
-        {
-            
-            slashTimer += Time.deltaTime;
-            if (slashTimer > (1 / UpdateInterval))
-            {
-                UpdateSwordSpritePosition(currentPos, swordSpriteCurrentPos);
-                currentSlash.UpadateSlash(currentPos, slashOffset);
-                slashTimer = 0;
-            }
-            ParticleTrail.GetComponent<Rigidbody>().MovePosition(Vector3.ProjectOnPlane(currentPos, normalPlane) - slashOffset);
-        }
-
-
-
-
+        
 
     }
     /// <summary>

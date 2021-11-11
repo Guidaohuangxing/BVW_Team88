@@ -9,7 +9,8 @@ public class Player : MonoBehaviour
     {
         Dying,//almost dead still can heal
         Alive,
-        PowerUp//when get enought combo can fight with other and use Trick
+        PowerUp,//when get enought combo can fight with other and use Trick
+        CombineAttack//Two people combine with each other so can not slash anymore 
     }
 
     public State playerState = State.Alive;
@@ -141,21 +142,19 @@ public class Player : MonoBehaviour
         {
             print("combo!");
         }
-        else if (combo >= 10)
+        else if (combo >= 5)
         {
             print("nice combo!");
         }
-        else if (combo >= 30)
+        else if (combo >= 10)
         {
             print("super combo!");
         }
-        else if (combo >= 50)
+        else if (combo >= 20)
         {
             print("crazzzzzy combo!");
             playerState = State.PowerUp;
         }
-
-
     }
 
 
