@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
         public float lowY;
         public Transform swordPos;
         public Transform playerPos;
+        public Transform swordSpritePos;
         public bool InArea(Vector3 point)
         {
             if (point.x < rightX && point.x > leftX)

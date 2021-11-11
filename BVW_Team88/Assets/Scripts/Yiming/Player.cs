@@ -19,6 +19,7 @@ public class Player : MonoBehaviour
     GameManager gameManager;
     public int position;
     public Vector3 SwordStartPosition;
+    public Vector3 SwordSpritePostion;//for the sword Animation
     public Sword childSword;
     private float timer = 0;
     public float threshold = .1f;
@@ -57,6 +58,7 @@ public class Player : MonoBehaviour
             {
                 SwordStartPosition = item.swordPos.position;
                 transform.position = item.playerPos.position;
+                SwordSpritePostion = item.swordSpritePos.position;
             }
         }
     }
