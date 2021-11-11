@@ -12,6 +12,11 @@ public class BossMechanics : MonoBehaviour
     public ManageScenes ms;
     public SoundFXManager sfx;
     public bool PowerUpReady,PowerUpUsed, bossIsAttackable = false;
+    public GameObject DeathObj; 
+    
+    
+    
+    private Vector3 spawnPoint = new Vector3(0.06f, 4.34f, 2.34f);
 
     private bool round2, round3, bossDead = false;
     private bool round1 = true;
@@ -88,6 +93,7 @@ public class BossMechanics : MonoBehaviour
         //Extreme angery bellow
         sfx.PlayMonsterEnraged();
         //instantiate huge object
+        Instantiate(DeathObj, spawnPoint, DeathObj.transform.rotation);
     }
     
     IEnumerator BossRecover(float recoveryTime)
