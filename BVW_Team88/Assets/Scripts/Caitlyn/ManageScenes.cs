@@ -20,6 +20,9 @@ public class ManageScenes : MonoBehaviour
     public void GoToStart() {
         SceneManager.LoadScene(0);
     }
+    public void GoToInstructions() {
+        SceneManager.LoadScene(4);
+    }
     public void GoToMain() {
         SceneManager.LoadScene(1);
     }

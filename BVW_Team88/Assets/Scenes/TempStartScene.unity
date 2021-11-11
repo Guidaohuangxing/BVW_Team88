@@ -918,7 +918,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 796438730}
         m_TargetAssemblyTypeName: ManageScenes, Assembly-CSharp
-        m_MethodName: GoToMain
+        m_MethodName: GoToInstructions
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

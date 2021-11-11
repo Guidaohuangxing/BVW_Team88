@@ -6,14 +6,16 @@ using UnityEngine.UI;
 public class BossMechanics : MonoBehaviour
 {
     public int monsterHp = 100;
+    public AudioSource bgm;
     public Slider monsterHealthbar;
+    public Text monsterHpText;
     public ManageScenes ms;
     public SoundFXManager sfx;
-    public bool PowerUpReady= false;
-    public bool PowerUpUsed = false;
+    public bool PowerUpReady,PowerUpUsed, bossIsAttackable = false;
 
-    private bool bossIsAttackable, round2, round3, bossDead = false;
+    private bool round2, round3, bossDead = false;
     private bool round1 = true;
+    private Vector3 approachDest = new Vector3(-0.136009991f, -2.01999998f, -7.93225527f);
 
     // Start is called before the first frame update
     void Start()
@@ -25,7 +27,7 @@ public class BossMechanics : MonoBehaviour
     void Update()
     {
         if (PowerUpReady) {
-            //move forward slowly
+            this.transform.position = Vector3.Lerp(this.transform.position, approachDest, 0.1f* Time.deltaTime);
         }
         if (PowerUpUsed) { 
             // move to position that players can attack you at
@@ -35,17 +37,25 @@ public class BossMechanics : MonoBehaviour
     public void DamageBoss(int damage) {
         if (bossIsAttackable) {
             sfx.PlayMonsterHurt();
-            monsterHp -= damage; 
+            monsterHp = monsterHp - damage; 
             monsterHealthbar.value = monsterHp;
+            monsterHpText.text = monsterHp + "/100";
         }
         if (monsterHp <= 0) {
+            Debug.Log("Monster hp = 0");
+            monsterHpText.text = "0/100";
             bossDead = true;
-            BossDie();
+            StartCoroutine(BossDie());
         }
     }
    
     public void BossApproach() {
         PowerUpReady = true; 
+    }
+    public void PowerUsed() {
+        PowerUpUsed = true;
+        PowerUpReady = false;
+        StunBoss();
     }
 
     public void StunBoss() {
@@ -73,9 +83,10 @@ public class BossMechanics : MonoBehaviour
 
     }
 
-    public void StartPK() { 
+    public void StartPK() {
         //Shake world maybe?
         //Extreme angery bellow
+        sfx.PlayMonsterEnraged();
         //instantiate huge object
     }
     
@@ -83,8 +94,10 @@ public class BossMechanics : MonoBehaviour
     {
         yield return new WaitForSeconds(recoveryTime);
         bossIsAttackable = false;
+        PowerUpUsed = false;
         //MonsterShriek with anger
         sfx.PlayMonsterMad();
+
         if (round1)
         {
             round1 = false;
@@ -104,11 +117,13 @@ public class BossMechanics : MonoBehaviour
 
     IEnumerator BossDie()
     {
+
+        bgm.volume = .3f;
         //Boss dying sfx
         sfx.PlayMonsterDeath();
         //Boss dying animation
+        yield return new WaitForSeconds(8f);
         //this.gameObject.SetActive(false);
-        yield return new WaitForSeconds(2f);
         ms.GoToWin();
 
     }
