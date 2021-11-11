@@ -1,5 +1,65 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &954215081
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 954215082}
+  m_Layer: 0
+  m_Name: SwordWeapon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &954215082
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 954215081}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.17, y: -0.48, z: 0.56}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1391683114119871170}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2136378639
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2136378640}
+  m_Layer: 0
+  m_Name: SwordWeapon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2136378640
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2136378639}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.98, y: -0.48, z: 0.56}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1391683113907175883}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1391683113907175882
 GameObject:
   m_ObjectHideFlags: 0
@@ -28,6 +88,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1391683114648159971}
+  - {fileID: 2136378640}
   m_Father: {fileID: 1391683115184479759}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -106,40 +167,47 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99425d624f10e9e44a806b92db6fde60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ScoreTxt: {fileID: 0}
+  manageScenes: {fileID: 0}
   swordAreas:
   - number: 0
     leftX: -3
-    rightX: -1
+    rightX: -0.4
     highY: 4
     lowY: 0
     swordPos: {fileID: 1391683114648159971}
     playerPos: {fileID: 1391683113907175883}
+    swordSpritePos: {fileID: 2136378640}
   - number: 1
-    leftX: -1
-    rightX: 1
+    leftX: -0.4
+    rightX: 3
     highY: 0
     lowY: 0
     swordPos: {fileID: 1391683114365521061}
     playerPos: {fileID: 1391683114119871170}
+    swordSpritePos: {fileID: 954215082}
   upperSwordAreas:
-  - number: 0
+  - number: 2
     leftX: 0
     rightX: 0
     highY: 0
     lowY: 0
     swordPos: {fileID: 1391683115070758565}
     playerPos: {fileID: 1391683115118078379}
-  - number: 1
+    swordSpritePos: {fileID: 0}
+  - number: 3
     leftX: 0
     rightX: 0
     highY: 0
     lowY: 0
     swordPos: {fileID: 1391683114986755441}
     playerPos: {fileID: 1391683114033222057}
-  life: 100
+    swordSpritePos: {fileID: 0}
+  life: 200
   score: 0
   playerParent: {fileID: 0}
   pathsNum: 2
+  isWin: 0
 --- !u!1 &1391683114119871173
 GameObject:
   m_ObjectHideFlags: 0
@@ -164,10 +232,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1391683114119871173}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.931, y: 0.5, z: 0}
+  m_LocalPosition: {x: 1.44, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1391683114365521061}
+  - {fileID: 954215082}
   m_Father: {fileID: 1391683115184479759}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -225,7 +294,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1391683114648159970}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.98, y: 0.78, z: 0.56}
+  m_LocalPosition: {x: 0.98, y: 0.88, z: 0.56}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1391683113907175883}
