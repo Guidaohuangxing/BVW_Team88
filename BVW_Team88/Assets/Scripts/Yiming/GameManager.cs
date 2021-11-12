@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
     public float pathsNum = 3;
 
     public bool isWin = false;
-
+    private SpawnAdvance spawn;
 
     private void Start()
     {
@@ -48,15 +48,11 @@ public class GameManager : MonoBehaviour
     }
     private void Update()
     {
-        //lifeTxt.text = "Total Life :" + life;
-        ScoreTxt.text = "Score :" + score;
-        //CheckTwoPlayerPosition();
+        ScoreTxt.text = "Score :" + score;  
         CheckEnding();
+        CheckPlayerStates();
     }
-    public void GotDamage(int damage)
-    {
-        life -= damage;
-    }
+ 
     
     public void GetScore(int s)
     {
@@ -64,64 +60,51 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public bool CheckTwoPlayersHealth()
+    public void CheckPlayerStates()
     {
-        if(players[0].Health<=0 && players[1].Health <= 0)
+        if(players[0].playerState == Player.State.Dying && players[1].playerState == Player.State.Dying)
         {
-            return true;
+            manageScenes.GoToLose();
         }
-        return false;
+        else if(players[0].playerState == Player.State.Dying || players[1].playerState == Player.State.Dying)
+        {
+            spawn.spawnState = SpawnAdvance.SpawnState.single;
+        }
+        else if(players[0].playerState == Player.State.PowerUp && players[1].playerState == Player.State.PowerUp)
+        {
+            players[0].playerState = Player.State.CombineAttack;
+            players[1].playerState = Player.State.CombineAttack;
+        }
+        else if(players[0].playerState == Player.State.CombineAttack && players[1].playerState == Player.State.CombineAttack)
+        {
+            spawn.spawnState = SpawnAdvance.SpawnState.stop;
+            //start the boss behaviour
+        }
+        else if(players[0].playerState == Player.State.Alive && players[1].playerState == Player.State.Alive)
+        {
+            spawn.spawnState = SpawnAdvance.SpawnState.normal;
+        }
     }
 
 
 
-    ///// <summary>
-    ///// simple check will polish that later
-    ///// </summary>
-    //public void CheckTwoPlayerPosition()
-    //{
-    //   if( players[0].position == players[1].position)
-    //    {
-    //        int upperPosition = players[0].position;
-    //        players[0].isRide = true;
-    //        players[0].SwordStartPosition = upperSwordAreas[upperPosition].swordPos.position;
-    //        players[0].transform.position = upperSwordAreas[upperPosition].playerPos.position;
-    //        players[0].position = upperSwordAreas[upperPosition].number;
-    //    }
-    //    else
-    //    {
-    //        players[0].isRide = false;
-    //    }
-    //}
+
+
+
+
     private void Initialized()
     {
         players = playerParent.GetComponentsInChildren<Player>();
+        spawn = FindObjectOfType<SpawnAdvance>();
+        spawn.spawnState = SpawnAdvance.SpawnState.normal;
     }
 
     private void CheckEnding()
     {
-        //use two players health to decide when to died
-        if (CheckTwoPlayersHealth())
-        {
-            manageScenes.GoToLose();
-        }
-        else if (isWin)
+ 
+        if (isWin)
         {
             manageScenes.GoToWin();
-        }
-       
-      
+        }  
     }
-
-    //void CheckIfDead()
-    //{
-    //    p1Dead = ph1.CheckHealth();
-    //    p2Dead = ph2.CheckHealth();
-
-    //    if (p1Dead && p2Dead)
-    //    {
-    //        manageScenes.GoToLose();
-    //    }
-
-    //}
 }

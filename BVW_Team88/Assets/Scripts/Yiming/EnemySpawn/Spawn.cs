@@ -49,7 +49,7 @@ public class Spawn : MonoBehaviour
 
     private void Update()
     {
-        musicTimer += Time.deltaTime;
+        //smusicTimer += Time.deltaTime;
         timer += Time.deltaTime;
 
         DifficultChangeTimer += Time.deltaTime;

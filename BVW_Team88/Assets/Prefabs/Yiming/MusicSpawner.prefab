@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6611475220022934997
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6611475220022934999}
+  - component: {fileID: 6611475220022934996}
+  m_Layer: 0
+  m_Name: MusicSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6611475220022934999
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6611475220022934997}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6611475220022934996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6611475220022934997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb1d6b7918f13df47bf09ccc3ce9adff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bpm: 96
+  bpmSpawn: 0
+  spawnState: 2
+  currentRoundsNumber: 0
+  rounds:
+  - roundNum: 0
+    spawnLanes:
+    - {fileID: 0}
+    - {fileID: 0}
+    spawnObjects:
+    - {fileID: 7879804616762959879, guid: 4f16fb21f5ab7df48800a6b060162505, type: 3}
+    - {fileID: 3905142475698801073, guid: e06783a230066cf4b9da161c5d8e2920, type: 3}
+    - {fileID: 4465797761577843836, guid: e11acc96302f49b45a69479c67ded6d8, type: 3}
+    - {fileID: 6538348282007628821, guid: d585da742c077c34e8a7ea11b03808b1, type: 3}
+    - {fileID: 5350996696823257532, guid: 4ac23eb24b7aaf54b90e93725c71caae, type: 3}
+    - {fileID: 7140704364368464992, guid: 75751e93b81bab4408b3e063343636b5, type: 3}
+    - {fileID: 7943072133526254167, guid: 9e356baba17775c43948a54d96695812, type: 3}
+    healingObjects:
+    - {fileID: 320191716822496986, guid: 086240536466fff44a28c64944fb5084, type: 3}
+    bpmRatio: 1
+    bpm: 96
+  objectsWasSpawn: []

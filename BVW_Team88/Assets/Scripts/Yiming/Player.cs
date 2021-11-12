@@ -32,7 +32,7 @@ public class Player : MonoBehaviour
     [SerializeField]
     private int health = 100;
     [SerializeField]
-    private int combo = 0;
+    public int combo = 0;
    
 
 
@@ -42,6 +42,8 @@ public class Player : MonoBehaviour
     private void Start()
     {
         health = MaxHealth;
+        healthBar.value = health;
+        healthVal.text = health + "/" + MaxHealth;
         gameManager = FindObjectOfType<GameManager>();
         SetPlayerPosition();
     }
