@@ -11,8 +11,8 @@ public class BossMechanics : MonoBehaviour
     public Text monsterHpText;
     public ManageScenes ms;
     public SoundFXManager sfx;
-    public bool PowerUpReady,PowerUpUsed, bossIsAttackable = false;
-    public GameObject DeathObj; 
+    public bool PowerUpReady,PowerUpUsed, moveBack, bossIsAttackable = false;
+    public GameObject DeathObj,pl1, pl2, pl3, pl4, cam; 
     
     
     
@@ -21,6 +21,9 @@ public class BossMechanics : MonoBehaviour
     private bool round2, round3, bossDead = false;
     private bool round1 = true;
     private Vector3 approachDest = new Vector3(-0.136009991f, -2.01999998f, -7.93225527f);
+    private Vector3 attackSpot= new Vector3(0f,-2.6099999f,-12.46f);
+    private Vector3 OGPos = new Vector3(0f, 2.38000011f, 2.5999999f);
+
 
     // Start is called before the first frame update
     void Start()
@@ -34,8 +37,11 @@ public class BossMechanics : MonoBehaviour
         if (PowerUpReady) {
             this.transform.position = Vector3.Lerp(this.transform.position, approachDest, 0.1f* Time.deltaTime);
         }
-        if (PowerUpUsed) { 
-            // move to position that players can attack you at
+        if (PowerUpUsed) {
+            this.transform.position = Vector3.Lerp(this.transform.position, attackSpot, 10f * Time.deltaTime);
+        }
+        if (moveBack) {
+            this.transform.position = Vector3.Lerp(this.transform.position, OGPos, 10f * Time.deltaTime);
         }
     }
 
@@ -66,8 +72,14 @@ public class BossMechanics : MonoBehaviour
     public void StunBoss() {
 
         bossIsAttackable = true;
+        pl1.SetActive(false);
+        pl2.SetActive(false);
+        pl3.SetActive(false);
+        pl4.SetActive(false);
 
         //Boss Stun Animation
+
+        //Boss Stunned and hurt sound 
 
         DamageBoss(15);
         if (!bossDead)
@@ -89,11 +101,13 @@ public class BossMechanics : MonoBehaviour
     }
 
     public void StartPK() {
+        pl1.SetActive(false);
+        pl2.SetActive(false);
+        pl3.SetActive(false);
+        pl4.SetActive(false);
         //Shake world maybe?
-        //Extreme angery bellow
-        sfx.PlayMonsterEnraged();
-        //instantiate huge object
-        Instantiate(DeathObj, spawnPoint, DeathObj.transform.rotation);
+
+        StartCoroutine(AutoKill());
     }
     
     IEnumerator BossRecover(float recoveryTime)
@@ -101,6 +115,13 @@ public class BossMechanics : MonoBehaviour
         yield return new WaitForSeconds(recoveryTime);
         bossIsAttackable = false;
         PowerUpUsed = false;
+        pl1.SetActive(true);
+        pl2.SetActive(true);
+        pl3.SetActive(true);
+        pl4.SetActive(true);
+        moveBack = true;
+        PowerUpUsed = false;
+        PowerUpReady = false;
         //MonsterShriek with anger
         sfx.PlayMonsterMad();
 
@@ -134,5 +155,49 @@ public class BossMechanics : MonoBehaviour
 
     }
 
+    IEnumerator AutoKill() {
+        sfx.PlayMonsterEnraged();
+        //StartCoroutine(ShakeCamera());
+        yield return new WaitForSeconds(4f);
+        //instantiate huge object
+        Instantiate(DeathObj, spawnPoint, DeathObj.transform.rotation);
+    }
 
+    //IEnumerator ShakeCamera() {
+    //    float lerpTime = 3f;
+    //    float timeToLeft, timeToRight, timeToNormalFL, timeToNormalFR = 0f;
+    //    Quaternion cameraTiltLeft = new Quaternion(3.3919754f, 0f, 0f, 0f);
+    //    Quaternion cameraTiltRight new Quaternion(3.38777995f, 0.168711796f, 2.8526454f, 0f);
+    //    Quaternion cameraNormal= new Quaternion(3.37648582, 359.675995, 354.515686,0f);
+    //    int count = 0;
+    //    while(count < 4){
+    //        timeToLeft, timeToRight, timeToNormalFL, timeToNormalFR = 0f;
+            
+    //        while (timeToLeft < lerpTime)
+    //        {
+    //            cam.transform.rotation = Quaternion.Lerp(cameraNormal, cameraTiltLeft, (timeToLeft / lerpTime));
+    //            timeToLeft += Time.deltaTime;
+    //            yield return null;
+    //        } while (timeToNormalFL < lerpTime)
+    //        {
+    //            cam.transform.rotation = Quaternion.Lerp(cameraTiltLeft, cameraNormal, (timeToNormalFL / lerpTime));
+    //            timeToNormalFL += Time.deltaTime;
+    //            yield return null;
+    //        } while (timeToRight < lerpTime)
+    //        {
+    //            cam.transform.rotation = Quaternion.Lerp(cameraNormal, cameraTiltRight, (timeToRight / lerpTime));
+    //            timeToRight += Time.deltaTime;
+    //            yield return null;
+    //        } while (timeToNormalFR < lerpTime)
+    //        {
+    //            cam.transform.rotation = Quaternion.Lerp(cameraTiltRight, cameraNormal, (timeToNormalFR / lerpTime));
+    //            timeToNormalFR += Time.deltaTime;
+    //            yield return null;
+    //        }
+    //    }
+    //    // Make sure we got there
+    //    cam.transform.rotation = cameraNormal;
+    //    yield return null;
+
+    //}
 }
