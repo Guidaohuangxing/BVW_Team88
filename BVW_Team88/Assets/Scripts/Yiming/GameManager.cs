@@ -18,27 +18,23 @@ public class GameManager : MonoBehaviour
         public Transform swordPos;
         public Transform playerPos;
         public Transform swordSpritePos;
-        public bool InArea(Vector3 point)
-        {
-            if (point.x < rightX && point.x > leftX)
-            {
-                return true;
-            }
-            return false;
-        }
+        //public bool InArea(Vector3 point)
+        //{
+        //    if (point.x < rightX && point.x > leftX)
+        //    {
+        //        return true;
+        //    }
+        //    return false;
+        //}
     }
 
     public List<SwordArea> swordAreas = new List<SwordArea>();
-    public List<SwordArea> upperSwordAreas = new List<SwordArea>();
-
-    public int life = 100;
     public int score = 0;
-
-    private Player[] players = new Player[2];
     public GameObject playerParent;
+    private Player[] players = new Player[2];
+   
 
-    public float pathsNum = 3;
-
+    
     public bool isWin = false;
     private SpawnAdvance spawn;
 
@@ -79,6 +75,7 @@ public class GameManager : MonoBehaviour
         {
             spawn.spawnState = SpawnAdvance.SpawnState.stop;
             //start the boss behaviour
+           
         }
         else if(players[0].playerState == Player.State.Alive && players[1].playerState == Player.State.Alive)
         {
@@ -101,7 +98,6 @@ public class GameManager : MonoBehaviour
 
     private void CheckEnding()
     {
- 
         if (isWin)
         {
             manageScenes.GoToWin();
