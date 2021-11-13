@@ -93,14 +93,6 @@ public class SpawnAdvance : MonoBehaviour
         objectsWasSpawn.Add(go);
     }
 
-
-
-
-
-
-
-
-
     /// <summary>
     /// move all spawn objects
     /// </summary>
@@ -112,11 +104,6 @@ public class SpawnAdvance : MonoBehaviour
             if (item != null) { item.GetComponent<AttackObject>().MoveToPlayer(); }
         }
     }
-
-
-
-
-
 
 
     private float SetBpmSpawn(float bpm, float bpmRatio)

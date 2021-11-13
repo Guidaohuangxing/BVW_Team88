@@ -75,7 +75,7 @@ public class GameManager : MonoBehaviour
         {
             spawn.spawnState = SpawnAdvance.SpawnState.stop;
             //start the boss behaviour
-           
+            FindObjectOfType<BossMechanics>().BossApproach();
         }
         else if(players[0].playerState == Player.State.Alive && players[1].playerState == Player.State.Alive)
         {
