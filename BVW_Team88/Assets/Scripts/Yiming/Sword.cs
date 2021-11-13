@@ -153,7 +153,7 @@ public class Sword : MonoBehaviour
         //work on rotation
         Vector3 dir = slashp - SwordTransform.position;
         float angle = Vector3.Angle(dir, SwordTransform.up);
-        print(angle);
+        //print(angle);
         if(Vector3.Cross(dir, SwordTransform.up).z > 0)
         {
             angle = -angle;

@@ -32,8 +32,8 @@ public class GameManager : MonoBehaviour
     public int score = 0;
     public GameObject playerParent;
     private Player[] players = new Player[2];
-   
-
+    public Boss bossController;
+    
     
     public bool isWin = false;
     private SpawnAdvance spawn;
@@ -68,14 +68,10 @@ public class GameManager : MonoBehaviour
         }
         else if(players[0].playerState == Player.State.PowerUp && players[1].playerState == Player.State.PowerUp)
         {
-            players[0].playerState = Player.State.CombineAttack;
-            players[1].playerState = Player.State.CombineAttack;
-        }
-        else if(players[0].playerState == Player.State.CombineAttack && players[1].playerState == Player.State.CombineAttack)
-        {
             spawn.spawnState = SpawnAdvance.SpawnState.stop;
             //start the boss behaviour
-            FindObjectOfType<BossMechanics>().BossApproach();
+            bossController.StartPreAttack();    
+            //FindObjectOfType<BossMechanics>().BossApproach();
         }
         else if(players[0].playerState == Player.State.Alive && players[1].playerState == Player.State.Alive)
         {
@@ -84,7 +80,15 @@ public class GameManager : MonoBehaviour
     }
 
 
-
+    /// <summary>
+    /// be call by animation clips on certain frame
+    /// </summary>
+    public void InformPlayerTheyCanComboAttack()
+    {
+        players[0].playerState = Player.State.CombineAttack;
+        players[1].playerState = Player.State.CombineAttack;
+        //inform boss at the same time to do attack prepare;  
+    }
 
 
 
@@ -94,6 +98,7 @@ public class GameManager : MonoBehaviour
         players = playerParent.GetComponentsInChildren<Player>();
         spawn = FindObjectOfType<SpawnAdvance>();
         spawn.spawnState = SpawnAdvance.SpawnState.normal;
+        bossController = FindObjectOfType<Boss>();
     }
 
     private void CheckEnding()

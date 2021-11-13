@@ -21,6 +21,7 @@ TagManager:
   - StackUp
   - StackDown
   - DamagePoint
+  - RightArea
   layers:
   - Default
   - TransparentFX
