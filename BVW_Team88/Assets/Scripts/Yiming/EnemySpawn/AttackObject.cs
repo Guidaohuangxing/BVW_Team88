@@ -63,6 +63,6 @@ public class AttackObject : MonoBehaviour,Attackable
 
     public virtual void HitPlayer()
     {
-        print("Cause Damage");
+        //print("Cause Damage");
     }
 }

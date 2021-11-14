@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HealingObject : AttackObject
 {
-    Player[] players;
+    public Player[] players;
     public int healAmount = 10;
     private void Start()
     {

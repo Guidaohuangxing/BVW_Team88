@@ -17,6 +17,7 @@ public class DetectDamage : MonoBehaviour
         if (ao != null && ao.canCauseDamage)
         {
             ao.HitPlayer();
+            print("do this in healing?");
             player.TakeDamage(ao.damage);
             ao.canCauseDamage = false;
             Destroy(ao.gameObject, .5f);

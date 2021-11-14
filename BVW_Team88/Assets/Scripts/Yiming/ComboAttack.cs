@@ -33,6 +33,12 @@ public class ComboAttack : MonoBehaviour
 
     public void TrackTwoSwordPosition()
     {
+        if(players[0].playerState != Player.State.CombineAttack && players[1].playerState != Player.State.CombineAttack)
+        {
+            slashStartPoint = Vector3.zero;
+            slashCurrentPoint = Vector3.zero;
+
+        }
         if(players[0].playerState ==Player.State.CombineAttack && players[1].playerState == Player.State.CombineAttack)
         {
             attackDecisionBar = FindObjectOfType<AttackDecisionBar>();
@@ -78,7 +84,8 @@ public class ComboAttack : MonoBehaviour
                             {
                                 item.playerState = Player.State.Wait;
                             }
-                            attackDecisionBar.DestoryAllBar();
+                            attackDecisionBar.canMove = false;
+                            attackDecisionBar.itsBoss.BossAttack();
                         }
                     }
                 }

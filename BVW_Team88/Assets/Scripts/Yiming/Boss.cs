@@ -67,7 +67,7 @@ public class Boss : MonoBehaviour
 
     public void BossAttack()
     {
-        Destroy(decisionBar);
+        Destroy(decisionBar, .5f);
         bossAnimator.SetBool("BossAttack", true);
         
     }
@@ -91,5 +91,6 @@ public class Boss : MonoBehaviour
     {
         health -= damage;
         bossAnimator.SetBool("BossWasAttacked", true);
+        //adjust GM and Boss's Rounds pointer;
     }
 }
