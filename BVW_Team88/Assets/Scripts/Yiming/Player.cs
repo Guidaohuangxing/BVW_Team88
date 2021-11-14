@@ -72,7 +72,7 @@ public class Player : MonoBehaviour
     /// </summary>
     public void CheckEnterDying()
     {
-        if (health < 0 && playerState == State.Alive)
+        if (health <= 0 && playerState == State.Alive)
         {
             health = dyingHealth;
             playerState = State.Dying;
@@ -102,6 +102,7 @@ public class Player : MonoBehaviour
         healthBar.value = health;
         healthVal.text = health + "/"+MaxHealth;
         combo = 0;
+        playerState = State.Alive;
         comboTxt.text = combo.ToString();
         
     }
@@ -136,7 +137,7 @@ public class Player : MonoBehaviour
         {
             print("super combo!");
         }
-        else if (combo >= 20)
+        else if (combo >= 15)
         {
             print("crazzzzzy combo!");
             playerState = State.PowerUp;

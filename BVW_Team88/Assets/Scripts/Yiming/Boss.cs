@@ -12,6 +12,7 @@ public class Boss : MonoBehaviour
     [System.Serializable]
     public struct BossRounds
     {
+        public int damage;
         public int roundNum;
         public float waitTimeForAttack;
         public GameObject attackedDecisionBar;
@@ -29,7 +30,7 @@ public class Boss : MonoBehaviour
     public Image delayHealth;
     private bool startMoveDelayHealth = false;
     public TextMeshProUGUI healthUI;
-
+    public CameraShake cameraShake;
 
     private void Start()
     {
@@ -112,7 +113,17 @@ public class Boss : MonoBehaviour
         bossAnimator.SetBool("BossAttack", true);
         EndBossSection(currentRound);
     }
-
+    /// <summary>
+    /// called in the animation and make damage
+    /// </summary>
+    public void BossAttackAndMakeDamage()
+    {
+        Player[] players = FindObjectsOfType<Player>();
+        foreach(var item in players)
+        {
+            item.TakeDamage(bossRounds[currentRound].damage);
+        }
+    }
     /// <summary>
     /// be called at go back animation
     /// </summary>
@@ -154,4 +165,25 @@ public class Boss : MonoBehaviour
             gameManager.isWin = true;
         }
     }
+
+
+    //alot of camera shake function to add in animation
+    public void AppearShake()
+    {
+        cameraShake.BigShake();
+    }
+
+    public void ApproachShake()
+    {
+        cameraShake.Shake();
+    }
+    public void WasAttackShake()
+    {
+        cameraShake.TinyShake();
+    }
+    public void AttackShake()
+    {
+        cameraShake.BigShake();
+    }
+
 }
