@@ -12,6 +12,7 @@ public class ComboAttack : MonoBehaviour
     public bool isNear = false;//if two player's tracker is near enough than 
     private Vector3 slashStartPoint;
     private Vector3 slashCurrentPoint;
+    public Transform projectPlaneZOffset;
     private void Start()
     {
         Instantiate();
@@ -51,10 +52,7 @@ public class ComboAttack : MonoBehaviour
                     //show combine animation and enter attack mode       
                 }
                 //tracker distance
-                for (int i = 0; i < players.Length; i++)
-                {
-                    UpdateSwordsSpritePlace(players[i], swordTrackers[i].position);
-                }  
+                UpdateallPlayerswords();
             }
             else if (isNear)
             {
@@ -89,14 +87,21 @@ public class ComboAttack : MonoBehaviour
                         }
                     }
                 }
-
+                UpdateallPlayerswords();
             }
         }
     }
 
-
+    public void UpdateallPlayerswords()
+    {
+        for (int i = 0; i < players.Length; i++)
+        {
+            UpdateSwordsSpritePlace(players[i], swordTrackers[i].position);
+        }
+    }
     public void UpdateSwordsSpritePlace(Player player,Vector3 tracker)
     {
+        player.childSword.SwordTransform.position = Vector3.ProjectOnPlane(tracker, new Vector3(0, 0, 1)) + new Vector3(0, 0, projectPlaneZOffset.position.z);
 
     }
 

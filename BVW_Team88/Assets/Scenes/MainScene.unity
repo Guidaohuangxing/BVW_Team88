@@ -1526,7 +1526,7 @@ MonoBehaviour:
   currentRound: 0
   bossRounds:
   - roundNum: 0
-    waitTimeForAttack: 15
+    waitTimeForAttack: 15200
     attackedDecisionBar: {fileID: 6888545939447861454, guid: 4c4a04f6ca8118b468a6d9899ea852d3, type: 3}
   bossAnimator: {fileID: 864104689}
   startTimer: 0
@@ -4088,41 +4088,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1526018644}
   m_CullTransparentMesh: 1
---- !u!21 &1531217734
-Material:
-  serializedVersion: 6
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Sprites/Default
-  m_Shader: {fileID: 10753, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _AlphaTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Floats:
-    - PixelSnap: 0
-    - _EnableExternalAlpha: 0
-    m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Flip: {r: 1, g: 1, b: 1, a: 1}
-    - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
-  m_BuildTextureStacks: []
 --- !u!1 &1580254854
 GameObject:
   m_ObjectHideFlags: 0
@@ -4428,7 +4393,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!43 &1663601488
+--- !u!4 &1762429353 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1391683114365521061, guid: 159aa44ea44db234d9188029c0416203, type: 3}
+  m_PrefabInstance: {fileID: 1391683114208146182}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1816493686 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2286010118363454825, guid: 5c67a6b4d44ccdf48ada4ceeb10b1ee8, type: 3}
+  m_PrefabInstance: {fileID: 2286010118032450335}
+  m_PrefabAsset: {fileID: 0}
+--- !u!43 &1821010511
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4592,11 +4567,6 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!1 &1816493686 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2286010118363454825, guid: 5c67a6b4d44ccdf48ada4ceeb10b1ee8, type: 3}
-  m_PrefabInstance: {fileID: 2286010118032450335}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1827357102 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1987841813, guid: ad3204b0aa10ef94aa156df5098cb5fd, type: 3}
@@ -4916,6 +4886,41 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1950351916}
   m_CullTransparentMesh: 1
+--- !u!21 &1967849025
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Sprites/Default
+  m_Shader: {fileID: 10753, guid: 0000000000000000f000000000000000, type: 0}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _AlphaTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - PixelSnap: 0
+    - _EnableExternalAlpha: 0
+    m_Colors:
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Flip: {r: 1, g: 1, b: 1, a: 1}
+    - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
+  m_BuildTextureStacks: []
 --- !u!1 &2022180592
 GameObject:
   m_ObjectHideFlags: 0
@@ -5408,11 +5413,11 @@ PrefabInstance:
     - target: {fileID: 2348914, guid: 4d293c8e162f3874b982baadd71153d2, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 1531217734}
+      objectReference: {fileID: 1967849025}
     - target: {fileID: 3380982, guid: 4d293c8e162f3874b982baadd71153d2, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 1663601488}
+      objectReference: {fileID: 1821010511}
     - target: {fileID: 1000014254142504, guid: 4d293c8e162f3874b982baadd71153d2, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -5596,6 +5601,7 @@ MonoBehaviour:
   distanceThreshold: 0.5
   slashThreshold: 1
   isNear: 0
+  projectPlaneZOffset: {fileID: 1762429353}
 --- !u!1001 &172235857277577271
 PrefabInstance:
   m_ObjectHideFlags: 0
