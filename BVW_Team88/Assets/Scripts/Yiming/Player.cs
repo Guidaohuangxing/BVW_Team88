@@ -72,7 +72,7 @@ public class Player : MonoBehaviour
     /// </summary>
     public void CheckEnterDying()
     {
-        if (health < 0 && playerState == State.Alive)
+        if (health <= 0 && playerState == State.Alive)
         {
             health = dyingHealth;
             playerState = State.Dying;
