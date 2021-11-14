@@ -34,7 +34,7 @@ public class Player : MonoBehaviour
     private int health = 100;
     [SerializeField]
     public int combo = 0;
-   
+    public List<int> comboStandard = new List<int>();
 
 
 
@@ -125,19 +125,19 @@ public class Player : MonoBehaviour
     {
         combo++;
         comboTxt.text = combo + "Combo";
-        if (combo >= 2)
+        if (combo == comboStandard[0])
         {
             print("combo!");
         }
-        else if (combo >= 5)
+        else if (combo == comboStandard[1])
         {
             print("nice combo!");
         }
-        else if (combo >= 10)
+        else if (combo == comboStandard[2])
         {
             print("super combo!");
         }
-        else if (combo >= 15)
+        else if (combo >= comboStandard[3])
         {
             print("crazzzzzy combo!");
             playerState = State.PowerUp;
