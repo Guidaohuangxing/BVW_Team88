@@ -11,6 +11,7 @@ public class AttackDecisionBar : MonoBehaviour
     public float threshold = 0.1f;
     public bool canMove = true;
     private Vector3 targetPoint;
+    public GameObject destroyThisObject;
     private void OnTriggerEnter(Collider other)
     {
         if(other.tag == "RightArea")
@@ -61,6 +62,11 @@ public class AttackDecisionBar : MonoBehaviour
     public void BeSlashedAndStop()
     {
         canMove = false;
-        Destroy(this.gameObject, .5f);
+        DestoryAllBar();
+    }
+
+    public void DestoryAllBar()
+    {
+        Destroy(destroyThisObject, 2f);
     }
 }

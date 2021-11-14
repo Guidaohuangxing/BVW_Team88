@@ -62,7 +62,7 @@ public class Boss : MonoBehaviour
             decisionBar = Instantiate(bossRounds[currentRound].attackedDecisionBar, DecisionBarInstantiatePlace.position, Quaternion.identity);           
         }
         startTimer = true;
-        gameManager.InformPlayerTheyCanComboAttack();
+        gameManager.SetPlayerStateToCertainState(Player.State.CombineAttack);
     }
 
     public void BossAttack()
@@ -83,6 +83,7 @@ public class Boss : MonoBehaviour
         bossAnimator.SetBool("BossAttack", false);
         bossAnimator.SetBool("BossPreAttack", false);
         bossAnimator.SetBool("BossWasAttacked", false);
+        gameManager.SetPlayerStateToCertainState(Player.State.Alive);
     }
 
 

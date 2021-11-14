@@ -79,18 +79,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
-
-    /// <summary>
-    /// be call by animation clips on certain frame
-    /// </summary>
-    public void InformPlayerTheyCanComboAttack()
+    public void SetPlayerStateToCertainState(Player.State state)
     {
-        players[0].playerState = Player.State.CombineAttack;
-        players[1].playerState = Player.State.CombineAttack;
-        //inform boss at the same time to do attack prepare;  
+        players[0].playerState = state;
+        players[1].playerState = state;
     }
-
-
 
 
     private void Initialized()

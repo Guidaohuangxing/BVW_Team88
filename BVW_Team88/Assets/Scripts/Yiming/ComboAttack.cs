@@ -58,7 +58,7 @@ public class ComboAttack : MonoBehaviour
                     isNear = false;
                 }
                 slashCurrentPoint = (swordTrackers[0].position + swordTrackers[1].position) / 2;
-                if ((slashCurrentPoint - slashStartPoint).y > 0 && Vector3.Distance(slashStartPoint, slashCurrentPoint) > slashThreshold)
+                if ((slashCurrentPoint - slashStartPoint).y < 0 && Vector3.Distance(slashStartPoint, slashCurrentPoint) > slashThreshold)
                 {
                     //success slash ;use decisionBar to decide whether is a effective attack
                     if (attackDecisionBar)
@@ -78,7 +78,7 @@ public class ComboAttack : MonoBehaviour
                             {
                                 item.playerState = Player.State.Wait;
                             }
-                            Destroy(attackDecisionBar.gameObject, .5f);
+                            attackDecisionBar.DestoryAllBar();
                         }
                     }
                 }
