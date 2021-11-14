@@ -157,47 +157,10 @@ public class BossMechanics : MonoBehaviour
 
     IEnumerator AutoKill() {
         sfx.PlayMonsterEnraged();
-        //StartCoroutine(ShakeCamera());
         yield return new WaitForSeconds(4f);
         //instantiate huge object
         Instantiate(DeathObj, spawnPoint, DeathObj.transform.rotation);
     }
 
-    //IEnumerator ShakeCamera() {
-    //    float lerpTime = 3f;
-    //    float timeToLeft, timeToRight, timeToNormalFL, timeToNormalFR = 0f;
-    //    Quaternion cameraTiltLeft = new Quaternion(3.3919754f, 0f, 0f, 0f);
-    //    Quaternion cameraTiltRight new Quaternion(3.38777995f, 0.168711796f, 2.8526454f, 0f);
-    //    Quaternion cameraNormal= new Quaternion(3.37648582, 359.675995, 354.515686,0f);
-    //    int count = 0;
-    //    while(count < 4){
-    //        timeToLeft, timeToRight, timeToNormalFL, timeToNormalFR = 0f;
-            
-    //        while (timeToLeft < lerpTime)
-    //        {
-    //            cam.transform.rotation = Quaternion.Lerp(cameraNormal, cameraTiltLeft, (timeToLeft / lerpTime));
-    //            timeToLeft += Time.deltaTime;
-    //            yield return null;
-    //        } while (timeToNormalFL < lerpTime)
-    //        {
-    //            cam.transform.rotation = Quaternion.Lerp(cameraTiltLeft, cameraNormal, (timeToNormalFL / lerpTime));
-    //            timeToNormalFL += Time.deltaTime;
-    //            yield return null;
-    //        } while (timeToRight < lerpTime)
-    //        {
-    //            cam.transform.rotation = Quaternion.Lerp(cameraNormal, cameraTiltRight, (timeToRight / lerpTime));
-    //            timeToRight += Time.deltaTime;
-    //            yield return null;
-    //        } while (timeToNormalFR < lerpTime)
-    //        {
-    //            cam.transform.rotation = Quaternion.Lerp(cameraTiltRight, cameraNormal, (timeToNormalFR / lerpTime));
-    //            timeToNormalFR += Time.deltaTime;
-    //            yield return null;
-    //        }
-    //    }
-    //    // Make sure we got there
-    //    cam.transform.rotation = cameraNormal;
-    //    yield return null;
-
-    //}
+    
 }
