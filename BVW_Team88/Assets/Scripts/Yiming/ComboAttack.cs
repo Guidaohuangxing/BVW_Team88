@@ -38,6 +38,7 @@ public class ComboAttack : MonoBehaviour
         {
             slashStartPoint = Vector3.zero;
             slashCurrentPoint = Vector3.zero;
+            isNear = false;
 
         }
         if(players[0].playerState ==Player.State.CombineAttack && players[1].playerState == Player.State.CombineAttack)
@@ -71,6 +72,7 @@ public class ComboAttack : MonoBehaviour
                         if (attackDecisionBar.isIntheRightArea)
                         {
                             attackDecisionBar.itsBoss.BossWasAttacked(40);
+
                             foreach(var item in players)
                             {
                                 item.playerState = Player.State.Wait;

@@ -46,7 +46,7 @@ public class SpawnAdvance : MonoBehaviour
     /// <param name="State"></param>
     public void SpawnObjectsByState(SpawnState State)
     {
-        if(State != SpawnState.stop)
+        if(State != SpawnState.stop && currentRoundsNumber < rounds.Count)
         {
             bpmSpawn = SetBpmSpawn(rounds[currentRoundsNumber].bpm, rounds[currentRoundsNumber].bpmRatio);
             timer += Time.deltaTime;

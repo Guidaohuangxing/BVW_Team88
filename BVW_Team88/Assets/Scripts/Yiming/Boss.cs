@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
+using TMPro;
 public class Boss : MonoBehaviour
 {
     public int maxHealth;
-    private int health;
+    public int health;
+    public  float previousHealth;
+
     [System.Serializable]
     public struct BossRounds
     {
@@ -21,28 +24,65 @@ public class Boss : MonoBehaviour
     public GameManager gameManager;
     private GameObject decisionBar;
     public Transform DecisionBarInstantiatePlace;
-
-
+    public SpawnAdvance spawn;
+    public Image healthBar;
+    public Image delayHealth;
+    private bool startMoveDelayHealth = false;
+    public TextMeshProUGUI healthUI;
 
 
     private void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
+        health = maxHealth;
+        previousHealth = health;
     }
 
     private void Update()
     {
-        if (startTimer)
+        if (startTimer && currentRound < bossRounds.Count)
         {
             timer += Time.deltaTime;
             if (timer >= bossRounds[currentRound].waitTimeForAttack)
             {
+                print("Tooooo Slow!");
                 BossAttack();
                 timer = 0;
             }
         }
+        UpdateBossHealth();
+        BossDead();
     }
     
+
+    public void UpdateBossHealth()
+    {
+        healthBar.fillAmount = (float)health / maxHealth;
+        healthUI.text = health + " / " + maxHealth;
+        if (health != previousHealth)
+        {
+            
+            if (startMoveDelayHealth)
+            {
+                previousHealth = Mathf.Lerp(previousHealth, health, 0.3f);
+                delayHealth.fillAmount = (float)previousHealth / maxHealth;
+            }
+            else if (!startMoveDelayHealth)
+            {
+                StartCoroutine(MoveDelayHealth());
+            }  
+        }
+        else if(health == previousHealth)
+        {
+            startMoveDelayHealth = false;
+        }
+    }
+    IEnumerator MoveDelayHealth()
+    {
+        yield return new WaitForSeconds(.5f);
+        startMoveDelayHealth = true;
+    }
+
     /// <summary>
     /// Start Attack Movement
     /// </summary>
@@ -67,9 +107,10 @@ public class Boss : MonoBehaviour
 
     public void BossAttack()
     {
+        startTimer = false;
         Destroy(decisionBar, .5f);
         bossAnimator.SetBool("BossAttack", true);
-        
+        EndBossSection(currentRound);
     }
 
     /// <summary>
@@ -77,9 +118,9 @@ public class Boss : MonoBehaviour
     /// </summary>
     public void GoBackOriginalPlace()
     {
-        print("reset all parameter");
+        //print("reset all parameter");
         //reset all possible parameter
-        startTimer = false;
+        
         bossAnimator.SetBool("BossAttack", false);
         bossAnimator.SetBool("BossPreAttack", false);
         bossAnimator.SetBool("BossWasAttacked", false);
@@ -89,8 +130,28 @@ public class Boss : MonoBehaviour
 
     public void BossWasAttacked(int damage)
     {
+        startTimer = false;
+        //print("was attacked");
         health -= damage;
         bossAnimator.SetBool("BossWasAttacked", true);
         //adjust GM and Boss's Rounds pointer;
+        currentRound++;
+        EndBossSection(currentRound);
+    }
+
+    /// <summary>
+    /// after boss attack/was attacked send message to Spawn to see what round it is
+    /// </summary>
+    public void EndBossSection(int roundPointer)
+    {
+        spawn.currentRoundsNumber = roundPointer;
+    }
+
+    public void BossDead()
+    {
+        if (health < 0)
+        {
+            gameManager.isWin = true;
+        }
     }
 }

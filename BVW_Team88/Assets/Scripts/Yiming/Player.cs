@@ -84,13 +84,18 @@ public class Player : MonoBehaviour
         
     }
 
+
+
+
+
+
     /// <summary>
     /// when was hit, get damage and reset the combo
     /// </summary>
     /// <param name="damage"></param>
     public void TakeDamage(int damage)
     {
-        if(health >= 0)
+        if(health > 0)
         {
             health -= damage;
         }

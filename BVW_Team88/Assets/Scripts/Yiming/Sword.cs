@@ -139,7 +139,7 @@ public class Sword : MonoBehaviour
     {
         SwordTransform.position = player.SwordSpritePostion;
         SwordTransform.rotation = Quaternion.identity;
-        print("StopSlash");
+        //print("StopSlash");
         slashing = false;
         currentSlash.Destory();
         slashTimer = 0;
