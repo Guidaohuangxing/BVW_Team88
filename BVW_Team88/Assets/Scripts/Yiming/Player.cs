@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
 {
     public enum State
     {
+        Wait,
         Dying,//almost dead still can heal
         Alive,
         PowerUp,//when get enought combo can fight with other and use Trick
@@ -82,28 +83,6 @@ public class Player : MonoBehaviour
         }
         
     }
-
-    //public void UpdatePosition()
-    //{
-    //    if (!childSword.slashing)
-    //    {
-    //        //print("track area" + tracker.position);
-    //        foreach(var item in gameManager.swordAreas)
-    //        {
-    //            if (item.InArea(tracker.position))
-    //            {
-    //                position = item.number;
-    //                if (!isRide)
-    //                {
-    //                    SwordStartPosition = item.swordPos.position;
-    //                    transform.position = item.playerPos.position;
-
-    //                }
-
-    //            }
-    //        }
-    //    }
-    //}
 
     /// <summary>
     /// when was hit, get damage and reset the combo

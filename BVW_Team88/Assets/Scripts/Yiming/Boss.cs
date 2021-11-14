@@ -59,7 +59,7 @@ public class Boss : MonoBehaviour
     {
         if (bossRounds[currentRound].attackedDecisionBar)
         {
-            decisionBar = Instantiate(bossRounds[currentRound].attackedDecisionBar, DecisionBarInstantiatePlace.position, Quaternion.identity);
+            decisionBar = Instantiate(bossRounds[currentRound].attackedDecisionBar, DecisionBarInstantiatePlace.position, Quaternion.identity);           
         }
         startTimer = true;
         gameManager.InformPlayerTheyCanComboAttack();
@@ -82,5 +82,13 @@ public class Boss : MonoBehaviour
         startTimer = false;
         bossAnimator.SetBool("BossAttack", false);
         bossAnimator.SetBool("BossPreAttack", false);
+        bossAnimator.SetBool("BossWasAttacked", false);
+    }
+
+
+    public void BossWasAttacked(int damage)
+    {
+        health -= damage;
+        bossAnimator.SetBool("BossWasAttacked", true);
     }
 }

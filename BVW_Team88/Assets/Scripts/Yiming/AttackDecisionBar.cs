@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class AttackDecisionBar : MonoBehaviour
 {
+    public Boss itsBoss;
     public bool isIntheRightArea = false;
     public Transform Target1Pos, Target2Pos;
     public float speed = 2f;
     public float threshold = 0.1f;
+    public bool canMove = true;
     private Vector3 targetPoint;
     private void OnTriggerEnter(Collider other)
     {
@@ -27,6 +29,7 @@ public class AttackDecisionBar : MonoBehaviour
 
     public void Start()
     {
+        itsBoss = FindObjectOfType<Boss>();
         this.transform.position = new Vector3((Target1Pos.position + Target2Pos.position).x * Random.Range(0.1f, 0.9f), Target2Pos.position.y, Target2Pos.position.z);
         targetPoint = Target1Pos.position;
     }
@@ -41,7 +44,11 @@ public class AttackDecisionBar : MonoBehaviour
         {
             targetPoint = Target1Pos.position;
         }
-        MoveItSelf(targetPoint);
+        if (canMove)
+        {
+            MoveItSelf(targetPoint);
+        }
+        
     }
 
     private void MoveItSelf(Vector3 Pos)
@@ -49,5 +56,11 @@ public class AttackDecisionBar : MonoBehaviour
         Vector3 dir = Pos - this.transform.position;
         dir = dir.normalized;
         this.GetComponent<Rigidbody>().MovePosition(this.GetComponent<Rigidbody>().position + dir * speed);
+    }
+
+    public void BeSlashedAndStop()
+    {
+        canMove = false;
+        Destroy(this.gameObject, .5f);
     }
 }
