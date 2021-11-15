@@ -7,7 +7,9 @@ public class IntroManager : MonoBehaviour
     public ManageScenes ms;
     public AudioClip startClip;
     public AudioSource BGM;
-    public SoundFXManager sfx; 
+    public SoundFXManager sfx;
+    public GameObject instrCanvas;
+    public GameObject introCanvas;
 
     public void StartGameUp() {
         StartCoroutine(PlayAnnouncer());
@@ -18,7 +20,9 @@ public class IntroManager : MonoBehaviour
         sfx.PlayStartNoise();
         yield return new WaitForSeconds(startClip.length);
         BGM.volume = 0.30f;
-        ms.GoToInstructions();
+        //ms.GoToInstructions();
+        instrCanvas.SetActive(true);
+        introCanvas.SetActive(false);
 
     }
 }
