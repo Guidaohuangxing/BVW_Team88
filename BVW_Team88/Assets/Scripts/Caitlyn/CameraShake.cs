@@ -12,12 +12,12 @@ public class CameraShake : MonoBehaviour
     }
 
     public void resetCam() {
-        cam.transform.position = OriginalPos;
+        StartCoroutine(ResetCamera());
     }
-
     public void TinyShake() { StartCoroutine(SmallShake()); }
     public void Shake() { StartCoroutine(MediumShake()); }
     public void BigShake() { StartCoroutine(HugeShake()); }
+    public void ShakeBackwards() { StartCoroutine(ShakeBack()); }
 
     IEnumerator SmallShake()
     {
@@ -231,4 +231,69 @@ public class CameraShake : MonoBehaviour
 
     }
 
+    IEnumerator ShakeBack() {
+        float lerpTime = 0.2f;
+        float b, f, OGt = 0f;
+
+        Vector3 moveBack, moveForward;
+
+        float forward = 0.1f;
+        float back = -0.2f;
+
+        //set vectors
+        moveBack= new Vector3(OriginalPos.x, OriginalPos.y, OriginalPos.z+back);
+        moveForward= new Vector3(OriginalPos.x, OriginalPos.y, OriginalPos.z+forward);
+
+        int count = 0;
+        int iterationTimes = 1;
+
+        //shake
+        while (count < iterationTimes)
+        {
+            b = 0f;
+            f = 0f;
+            OGt = 0f;
+           
+            //move back a little
+            while (b < lerpTime)
+            {
+                cam.transform.position = Vector3.Lerp(cam.transform.position, moveBack, (b / lerpTime));
+                b += Time.deltaTime;
+                yield return null;
+            }
+            //move forward a little
+            while (f < lerpTime)
+            {
+                cam.transform.position = Vector3.Lerp(cam.transform.position, moveForward, (f / lerpTime));
+                f += Time.deltaTime;
+                yield return null;
+            }
+            //Move back to back position
+            while (OGt < lerpTime)
+            {
+                cam.transform.position = Vector3.Lerp(cam.transform.position, OriginalPos, (OGt / lerpTime));
+                OGt += Time.deltaTime;
+                yield return null;
+            }
+            //yield return null;
+            count = count + 1;
+        }
+
+        cam.transform.position = OriginalPos;
+        yield return null;
+
+    }
+
+    IEnumerator ResetCamera() {
+        float lerpTime = 0.2f;
+        float time = 0;
+        while (time < lerpTime)
+        {
+            cam.transform.position = Vector3.Lerp(cam.transform.position, OriginalPos, (time / lerpTime));
+            time += Time.deltaTime;
+            yield return null;
+        }
+        cam.transform.position = OriginalPos;
+        yield return null;
+    }
 }
