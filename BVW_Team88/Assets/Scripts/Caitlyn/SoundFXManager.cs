@@ -4,13 +4,26 @@ using UnityEngine;
 
 public class SoundFXManager : MonoBehaviour
 {
+    public static SoundFXManager instance;
     public AudioSource slice, hit, monster, announcer;
 
     public AudioClip monsterMad, monsterNormal, monsterDeath, monsterHurt, monsterEnraged,sliceNoise, hitByMonster;
-    public AudioClip defeatClip, startClip, timeIsRunningOut, victoryClip, comboClip; 
+    public AudioClip defeatClip, startClip, timeIsRunningOut, victoryClip, comboClip;
+    public AudioClip powerupAttack, racconEating;
     public List<AudioClip> randomHit = new List<AudioClip>();
     public List<AudioClip> randomPraise = new List<AudioClip>();
-
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            //DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
     //Monster sounds ----------------------------------------------
     public void PlayMonsterMad() {
         monster.PlayOneShot(monsterMad);
@@ -56,6 +69,7 @@ public class SoundFXManager : MonoBehaviour
     //Instruction/Commentator sounds------------------------------
     public void PlayComboPraise()
     {
+        
         int i = Random.Range(0, randomPraise.Count);
         announcer.PlayOneShot(randomPraise[i]);
     }
@@ -79,13 +93,21 @@ public class SoundFXManager : MonoBehaviour
         announcer.PlayOneShot(comboClip);
     }
 
+    
 
     //-------------------------------------------------------------
 
 
 
     //Other sounds ------------------------------------------------
+    public void PlayPowerUp()
+    {
+        announcer.PlayOneShot(powerupAttack);
+    }
 
-
+    public void RacconEating()
+    {
+        monster.PlayOneShot(racconEating);
+    }
     //-------------------------------------------------------------
 }

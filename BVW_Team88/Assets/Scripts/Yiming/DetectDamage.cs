@@ -21,6 +21,7 @@ public class DetectDamage : MonoBehaviour
             player.TakeDamage(ao.damage);
             ao.canCauseDamage = false;
             Destroy(ao.gameObject, .5f);
+            SoundFXManager.instance.PlayHit();
         }
         else if(ao!= null && !ao.canCauseDamage)
         {
