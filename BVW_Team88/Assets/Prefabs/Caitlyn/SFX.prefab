@@ -390,11 +390,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3424428226176885074}
-  - component: {fileID: 3424428226176885073}
   - component: {fileID: 3424428226176885072}
-  - component: {fileID: 3424428227217834845}
   m_Layer: 0
-  m_Name: MusicManager
+  m_Name: AnnouncerManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -414,39 +412,6 @@ Transform:
   m_Father: {fileID: 3424428226320295562}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3424428226176885073
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3424428226176885075}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53253ba2ee9854d4e9a047b96902f8b5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bpm: 96
-  bpmRatio: 1
-  bpmSpawn: 0
-  spawnPointP1: {fileID: 0}
-  spawnPointP2: {fileID: 0}
-  spawnPointTentacles: {fileID: 0}
-  trash1Prefab: {fileID: 1286476945859792200, guid: 104c4a513260369469164cb6625a388d, type: 3}
-  trash2Prefab: {fileID: 6477210484842577325, guid: 434aa3f1ab41a4b419075c22e0c693d1, type: 3}
-  trash3Prefab: {fileID: 1286476945859792200, guid: d771858bf51c3374ea51e94c0c5f4325, type: 3}
-  trash4Prefab: {fileID: 6477210484842577325, guid: 1ac1bef530d3397479df914abf26a207, type: 3}
-  tentaclePrefab: {fileID: 4355277528885179013, guid: b6901191a19b02c469beb8422761012a, type: 3}
-  player1: {fileID: 0}
-  player2: {fileID: 0}
-  stackUp: {fileID: 0}
-  raiseDifficultyTime: 20
-  sfxM: {fileID: 1325876510}
-  p1Obj: []
-  p2Obj: []
-  p3Obj: []
-  p4Obj: []
-  bossObj: []
 --- !u!82 &3424428226176885072
 AudioSource:
   m_ObjectHideFlags: 0
@@ -457,7 +422,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 2aef72afc9c0e2246967a7e19ebe958a, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 0.75
   m_Pitch: 1
@@ -543,20 +508,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &3424428227217834845
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3424428226176885075}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d96947dfc594b20458bc31e5802cf8e2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bgm: {fileID: 8300000, guid: 2aef72afc9c0e2246967a7e19ebe958a, type: 3}
-  ms: {fileID: 0}
 --- !u!1 &3424428226320295563
 GameObject:
   m_ObjectHideFlags: 0
@@ -568,7 +519,7 @@ GameObject:
   - component: {fileID: 3424428226320295562}
   - component: {fileID: 1325876510}
   m_Layer: 0
-  m_Name: SoundManager
+  m_Name: SFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -607,7 +558,32 @@ MonoBehaviour:
   slice: {fileID: 433401341}
   hit: {fileID: 648455613}
   monster: {fileID: 1481782039}
+  announcer: {fileID: 3424428226176885072}
   monsterMad: {fileID: 8300000, guid: d70283168d5d5e14085fb632b525325a, type: 3}
   monsterNormal: {fileID: 8300000, guid: 667f15758f6ad4e41b0bf3856f7f13db, type: 3}
+  monsterDeath: {fileID: 8300000, guid: c1873973b73fd55498d590044a5be462, type: 3}
+  monsterHurt: {fileID: 8300000, guid: 322a3f404b76d934db501046bf04df64, type: 3}
+  monsterEnraged: {fileID: 8300000, guid: 8d5dcaf4a0a67d648b4b959df9034ed1, type: 3}
   sliceNoise: {fileID: 8300000, guid: 6ad63872380b5db4d998bdbbbab77a47, type: 3}
   hitByMonster: {fileID: 8300000, guid: c0ec065c598673444a34375242a52076, type: 3}
+  defeatClip: {fileID: 8300000, guid: 3f0c7da2a93c4fc4fbd2099c5bf728b7, type: 3}
+  startClip: {fileID: 8300000, guid: ca0932108c57860498d4fe681518fa5a, type: 3}
+  timeIsRunningOut: {fileID: 8300000, guid: 039f2b3067d9cba4ea6bb6a8c15cc677, type: 3}
+  victoryClip: {fileID: 8300000, guid: c8002b3960285904087f23a182e4407d, type: 3}
+  comboClip: {fileID: 8300000, guid: df4cfe43896c5ca4b95956119ca24288, type: 3}
+  randomHit:
+  - {fileID: 8300000, guid: 8aeab5e01f386fc43a0eabb94d62b680, type: 3}
+  - {fileID: 8300000, guid: 8019a5a3704702843bdc84f8a17a578d, type: 3}
+  randomPraise:
+  - {fileID: 8300000, guid: 2ad67e128143af242ab0cc3daabe8e01, type: 3}
+  - {fileID: 8300000, guid: 7a1df8db3aca9d343a4272af7653353b, type: 3}
+  - {fileID: 8300000, guid: df4cfe43896c5ca4b95956119ca24288, type: 3}
+  - {fileID: 8300000, guid: 3d822ee92c07668469e5defc8678543b, type: 3}
+  - {fileID: 8300000, guid: d0a30c69aa642f2449bcd03e6eb50051, type: 3}
+  - {fileID: 8300000, guid: 54ecc8e319ae82b42a469c54100fedee, type: 3}
+  - {fileID: 8300000, guid: 73524339042348f449dde186792ce1da, type: 3}
+  - {fileID: 8300000, guid: 11f12c8eb185eec4e82dce7dd8a1db2c, type: 3}
+  - {fileID: 8300000, guid: 9e0c64c806add10428cbeede91035fcf, type: 3}
+  - {fileID: 8300000, guid: 65e43a01849119f4084871e538e59a3e, type: 3}
+  - {fileID: 8300000, guid: fcc8d5e4eaefee84088bd8cb54516a29, type: 3}
+  - {fileID: 8300000, guid: d6f015869eb686e4383ea7e8141deb55, type: 3}

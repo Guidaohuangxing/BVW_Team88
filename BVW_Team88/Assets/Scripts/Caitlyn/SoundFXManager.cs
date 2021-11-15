@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class SoundFXManager : MonoBehaviour
 {
-    public AudioSource slice, hit, monster;
+    public AudioSource slice, hit, monster, announcer;
 
     public AudioClip monsterMad, monsterNormal, monsterDeath, monsterHurt, monsterEnraged,sliceNoise, hitByMonster;
+    public AudioClip defeatClip, startClip, timeIsRunningOut, victoryClip, comboClip; 
     public List<AudioClip> randomHit = new List<AudioClip>();
-
+    public List<AudioClip> randomPraise = new List<AudioClip>();
 
     //Monster sounds ----------------------------------------------
     public void PlayMonsterMad() {
@@ -53,14 +54,32 @@ public class SoundFXManager : MonoBehaviour
 
 
     //Instruction/Commentator sounds------------------------------
+    public void PlayComboPraise()
+    {
+        int i = Random.Range(0, randomPraise.Count);
+        announcer.PlayOneShot(randomPraise[i]);
+    }
+    public void PlayLoseNoise()
+    {
+        announcer.PlayOneShot(defeatClip);
+    }
+    public void PlayWinNoise()
+    {
+        announcer.PlayOneShot(victoryClip);
+    }
+    public void PlayStartNoise()
+    {
+        announcer.PlayOneShot(startClip);
+    }
+    public void PlayTimeWarning()
+    {
+        announcer.PlayOneShot(timeIsRunningOut);
+    }
+    public void PlayCombo() {
+        announcer.PlayOneShot(comboClip);
+    }
 
-    /* public void PlayComboSound() { 
-         combo.PlayOneShot(comboClip);
-     }
-     public void PlaySuperCombo() { 
-         combo.PlayOneShot(superComboClip);
-     }
-     */
+
     //-------------------------------------------------------------
 
 
