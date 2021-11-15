@@ -4548,94 +4548,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1325876510, guid: 06cd3b4dc6fc58e48affd677fb44d59d, type: 3}
-      propertyPath: announcer
-      value: 
-      objectReference: {fileID: 2074991740}
-    - target: {fileID: 1325876510, guid: 06cd3b4dc6fc58e48affd677fb44d59d, type: 3}
-      propertyPath: startClip
-      value: 
-      objectReference: {fileID: 8300000, guid: ca0932108c57860498d4fe681518fa5a, type: 3}
-    - target: {fileID: 1325876510, guid: 06cd3b4dc6fc58e48affd677fb44d59d, type: 3}
-      propertyPath: defeatClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 3f0c7da2a93c4fc4fbd2099c5bf728b7, type: 3}
-    - target: {fileID: 1325876510, guid: 06cd3b4dc6fc58e48affd677fb44d59d, type: 3}
-      propertyPath: monsterHurt
-      value: 
-      objectReference: {fileID: 8300000, guid: 322a3f404b76d934db501046bf04df64, type: 3}
-    - target: {fileID: 1325876510, guid: 06cd3b4dc6fc58e48affd677fb44d59d, type: 3}
-      propertyPath: victoryClip
-      value: 
-      objectReference: {fileID: 8300000, guid: c8002b3960285904087f23a182e4407d, type: 3}
-    - target: {fileID: 1325876510, guid: 06cd3b4dc6fc58e48affd677fb44d59d, type: 3}
-      propertyPath: monsterDeath
-      value: 
-      objectReference: {fileID: 8300000, guid: c1873973b73fd55498d590044a5be462, type: 3}
-    - target: {fileID: 1325876510, guid: 06cd3b4dc6fc58e48affd677fb44d59d, type: 3}
-      propertyPath: monsterEnraged
-      value: 
-      objectReference: {fileID: 8300000, guid: 8d5dcaf4a0a67d648b4b959df9034ed1, type: 3}
-    - target: {fileID: 1325876510, guid: 06cd3b4dc6fc58e48affd677fb44d59d, type: 3}
-      propertyPath: timeIsRunningOut
-      value: 
-      objectReference: {fileID: 8300000, guid: 039f2b3067d9cba4ea6bb6a8c15cc677, type: 3}
-    - target: {fileID: 1325876510, guid: 06cd3b4dc6fc58e48affd677fb44d59d, type: 3}
-      propertyPath: randomPraise.Array.size
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 1325876510, guid: 06cd3b4dc6fc58e48affd677fb44d59d, type: 3}
-      propertyPath: randomPraise.Array.data[0]
-      value: 
-      objectReference: {fileID: 8300000, guid: 2ad67e128143af242ab0cc3daabe8e01, type: 3}
-    - target: {fileID: 1325876510, guid: 06cd3b4dc6fc58e48affd677fb44d59d, type: 3}
-      propertyPath: randomPraise.Array.data[1]
-      value: 
-      objectReference: {fileID: 8300000, guid: 7a1df8db3aca9d343a4272af7653353b, type: 3}
-    - target: {fileID: 1325876510, guid: 06cd3b4dc6fc58e48affd677fb44d59d, type: 3}
-      propertyPath: randomPraise.Array.data[2]
-      value: 
-      objectReference: {fileID: 8300000, guid: df4cfe43896c5ca4b95956119ca24288, type: 3}
-    - target: {fileID: 1325876510, guid: 06cd3b4dc6fc58e48affd677fb44d59d, type: 3}
-      propertyPath: randomPraise.Array.data[3]
-      value: 
-      objectReference: {fileID: 8300000, guid: 3d822ee92c07668469e5defc8678543b, type: 3}
-    - target: {fileID: 1325876510, guid: 06cd3b4dc6fc58e48affd677fb44d59d, type: 3}
-      propertyPath: randomPraise.Array.data[4]
-      value: 
-      objectReference: {fileID: 8300000, guid: d0a30c69aa642f2449bcd03e6eb50051, type: 3}
-    - target: {fileID: 1325876510, guid: 06cd3b4dc6fc58e48affd677fb44d59d, type: 3}
-      propertyPath: randomPraise.Array.data[5]
-      value: 
-      objectReference: {fileID: 8300000, guid: 54ecc8e319ae82b42a469c54100fedee, type: 3}
-    - target: {fileID: 1325876510, guid: 06cd3b4dc6fc58e48affd677fb44d59d, type: 3}
-      propertyPath: randomPraise.Array.data[6]
-      value: 
-      objectReference: {fileID: 8300000, guid: 73524339042348f449dde186792ce1da, type: 3}
-    - target: {fileID: 1325876510, guid: 06cd3b4dc6fc58e48affd677fb44d59d, type: 3}
-      propertyPath: randomPraise.Array.data[7]
-      value: 
-      objectReference: {fileID: 8300000, guid: 11f12c8eb185eec4e82dce7dd8a1db2c, type: 3}
-    - target: {fileID: 1325876510, guid: 06cd3b4dc6fc58e48affd677fb44d59d, type: 3}
-      propertyPath: randomPraise.Array.data[8]
-      value: 
-      objectReference: {fileID: 8300000, guid: 9e0c64c806add10428cbeede91035fcf, type: 3}
-    - target: {fileID: 1325876510, guid: 06cd3b4dc6fc58e48affd677fb44d59d, type: 3}
-      propertyPath: randomPraise.Array.data[9]
-      value: 
-      objectReference: {fileID: 8300000, guid: 65e43a01849119f4084871e538e59a3e, type: 3}
-    - target: {fileID: 1325876510, guid: 06cd3b4dc6fc58e48affd677fb44d59d, type: 3}
-      propertyPath: randomPraise.Array.data[10]
-      value: 
-      objectReference: {fileID: 8300000, guid: fcc8d5e4eaefee84088bd8cb54516a29, type: 3}
-    - target: {fileID: 1325876510, guid: 06cd3b4dc6fc58e48affd677fb44d59d, type: 3}
-      propertyPath: randomPraise.Array.data[11]
-      value: 
-      objectReference: {fileID: 8300000, guid: d6f015869eb686e4383ea7e8141deb55, type: 3}
-    - target: {fileID: 1325876510, guid: 06cd3b4dc6fc58e48affd677fb44d59d, type: 3}
-      propertyPath: randomPraise.Array.data[12]
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 3424428226320295562, guid: 06cd3b4dc6fc58e48affd677fb44d59d, type: 3}
       propertyPath: m_RootOrder
       value: 13
@@ -4686,11 +4598,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 06cd3b4dc6fc58e48affd677fb44d59d, type: 3}
---- !u!82 &2074991740 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 3424428226176885072, guid: 06cd3b4dc6fc58e48affd677fb44d59d, type: 3}
-  m_PrefabInstance: {fileID: 2074991739}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2079594111
 PrefabInstance:
   m_ObjectHideFlags: 0
