@@ -35,6 +35,9 @@ public class ManageScenes : MonoBehaviour
     public void GoToLose() {
         SceneManager.LoadScene(3);
     }
+    public void GoToCredits() {
+        SceneManager.LoadScene(5);
+    }
     public void QuitGame() {
         Application.Quit();
     }
