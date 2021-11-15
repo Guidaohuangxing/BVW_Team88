@@ -87,6 +87,11 @@ public class SpawnAdvance : MonoBehaviour
         go.GetComponent<AttackObject>().targetPosition = lanes[lanesPointer].endPos.position;
         go.GetComponent<AttackObject>().lane = lanes[lanesPointer].LaneNum;//give the upper lane different lane num
         go.GetComponent<AttackObject>().setLane = true;
+        Material[] ms = go.GetComponent<Renderer>().materials;
+        foreach (var item in ms)
+        {
+            item.SetFloat("_EdgePower", 100f);
+        }
         if (lanes[lanesPointer].objectSpeed != 0)
         {
             go.GetComponent<AttackObject>().speed = lanes[lanesPointer].objectSpeed;

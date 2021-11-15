@@ -129,7 +129,7 @@ public class Player : MonoBehaviour
     public void GetCombo()
     {
         combo++;
-        comboTxt.text = combo + "Combo";
+        comboTxt.text = "x" + combo;
         if (combo == comboStandard[0])
         {
             print("combo!");
