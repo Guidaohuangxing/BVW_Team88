@@ -65,7 +65,7 @@ public class Boss : MonoBehaviour
             
             if (startMoveDelayHealth)
             {
-                previousHealth = Mathf.Lerp(previousHealth, health, 0.2f);
+                previousHealth = Mathf.Lerp(previousHealth, health, 0.02f);
                 delayHealth.fillAmount = (float)previousHealth / maxHealth;
             }
             else if (!startMoveDelayHealth)
@@ -185,5 +185,8 @@ public class Boss : MonoBehaviour
     {
         cameraShake.BigShake();
     }
-
+    public void StartGame()
+    {
+        gameManager.StartGame();
+    }
 }

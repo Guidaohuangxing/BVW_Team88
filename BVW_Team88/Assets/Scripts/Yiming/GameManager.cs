@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour
     
     public bool isWin = false;
     private SpawnAdvance spawn;
-
+    public List<GameObject> delayReshowObject;//something like UI or weapon Sprite,will not show at frist
     private void Start()
     {
         Initialized();
@@ -91,6 +91,10 @@ public class GameManager : MonoBehaviour
         players = playerParent.GetComponentsInChildren<Player>();
         spawn = FindObjectOfType<SpawnAdvance>(); 
         bossController = FindObjectOfType<Boss>();
+        foreach(var item in delayReshowObject)
+        {
+            item.SetActive(false);
+        }
     }
 
     private void CheckEnding()
@@ -101,10 +105,14 @@ public class GameManager : MonoBehaviour
         }  
     }
 
-
+    
     public void StartGame()
     {
         spawn.spawnState = SpawnAdvance.SpawnState.normal;
         SetPlayerStateToCertainState(Player.State.Alive);
+        foreach (var item in delayReshowObject)
+        {
+            item.SetActive(true);
+        }
     }
 }

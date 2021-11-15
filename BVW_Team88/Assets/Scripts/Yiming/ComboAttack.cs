@@ -13,6 +13,8 @@ public class ComboAttack : MonoBehaviour
     private Vector3 slashStartPoint;
     private Vector3 slashCurrentPoint;
     public Transform projectPlaneZOffset;
+    public GameObject ComboAttackEffect;
+    Vector3 zOffset;
     private void Start()
     {
         Instantiate();
@@ -30,6 +32,7 @@ public class ComboAttack : MonoBehaviour
         {
             swordTrackers.Add(item.tracker);
         }
+        zOffset = new Vector3(0, 0, projectPlaneZOffset.position.z);
     }
 
     public void TrackTwoSwordPosition()
@@ -72,7 +75,10 @@ public class ComboAttack : MonoBehaviour
                         if (attackDecisionBar.isIntheRightArea)
                         {
                             attackDecisionBar.itsBoss.BossWasAttacked(40);
-
+                            if (ComboAttackEffect)
+                            {
+                                Instantiate(ComboAttackEffect, zOffset + Vector3.forward * 0.3f - Vector3.up * 2.5f, Quaternion.identity);
+                            }
                             foreach(var item in players)
                             {
                                 item.playerState = Player.State.Wait;
@@ -103,7 +109,7 @@ public class ComboAttack : MonoBehaviour
     }
     public void UpdateSwordsSpritePlace(Player player,Vector3 tracker)
     {
-        player.childSword.SwordTransform.position = Vector3.ProjectOnPlane(tracker, new Vector3(0, 0, 1)) + new Vector3(0, 0, projectPlaneZOffset.position.z);
+        player.childSword.SwordTransform.position = Vector3.ProjectOnPlane(tracker, new Vector3(0, 0, 1)) + zOffset;
 
     }
 
