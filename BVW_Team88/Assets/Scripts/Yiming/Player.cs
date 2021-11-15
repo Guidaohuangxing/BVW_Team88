@@ -104,8 +104,11 @@ public class Player : MonoBehaviour
         {
             health -= damage;
         }
-        combo = 0;
-        playerState = State.Alive;
+        if (!FindObjectOfType<Boss>().bossAnimator.GetBool("BossPreAttack"))
+        {
+            combo = 0;
+            playerState = State.Alive;
+        } 
         comboTxt.text = combo.ToString();
         
     }

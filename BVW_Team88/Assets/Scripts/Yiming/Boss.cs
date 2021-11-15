@@ -16,6 +16,7 @@ public class Boss : MonoBehaviour
         public int roundNum;
         public float waitTimeForAttack;
         public GameObject attackedDecisionBar;
+        public int score;
     }
     public int currentRound;
     public List<BossRounds> bossRounds;
@@ -31,7 +32,7 @@ public class Boss : MonoBehaviour
     private bool startMoveDelayHealth = false;
     public TextMeshProUGUI healthUI;
     public CameraShake cameraShake;
-
+    
     private void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
@@ -144,11 +145,16 @@ public class Boss : MonoBehaviour
         startTimer = false;
         //print("was attacked");
         health -= damage;
-        bossAnimator.SetBool("BossWasAttacked", true);
+        gameManager.GetScore(bossRounds[currentRound].score);
         //adjust GM and Boss's Rounds pointer;
         currentRound++;
         EndBossSection(currentRound);
     }
+    public void StartWasAttackedAnimation()
+    {
+        bossAnimator.SetBool("BossWasAttacked", true);
+    }
+
 
     /// <summary>
     /// after boss attack/was attacked send message to Spawn to see what round it is
@@ -179,7 +185,7 @@ public class Boss : MonoBehaviour
     }
     public void WasAttackShake()
     {
-        cameraShake.TinyShake();
+        cameraShake.BigShake();
     }
     public void AttackShake()
     {

@@ -101,10 +101,16 @@ public class GameManager : MonoBehaviour
     {
         if (isWin)
         {
-            manageScenes.GoToWin();
+            SetPlayerStateToCertainState(Player.State.Wait);
+            StartCoroutine(JumpToWin());
+           
         }  
     }
-
+    IEnumerator JumpToWin()
+    {
+        yield return new WaitForSeconds(2f);
+        manageScenes.GoToWin();
+    }
     
     public void StartGame()
     {
