@@ -37,13 +37,18 @@ public class Player : MonoBehaviour
     [SerializeField]
     private int health = 100;
     private float previousHealth = 0;
+
+
+    //combo parameter
     [SerializeField]
     public int combo = 0;
+    private int previousCombo = 0;
     public List<int> comboStandard = new List<int>();
-
-
-
-
+    public Image ComboBar;
+    private bool turnBig = false;
+    public float largerScale = -2f;
+    private Vector3 OriginalScale;
+    private Vector3 BiggerScale;
     public TextMeshProUGUI comboTxt;
     private void Start()
     {
@@ -51,11 +56,16 @@ public class Player : MonoBehaviour
         previousHealth = health;
         gameManager = FindObjectOfType<GameManager>();
         SetPlayerPosition();
+        combo = 0;
+        previousCombo = combo;
+        OriginalScale = comboTxt.transform.localScale;
+        BiggerScale = OriginalScale * largerScale;
     }
     private void Update()
     {
         CheckEnterDying();
         UpdateHealth();
+        UpdateCombo();
     }
 
 
@@ -106,7 +116,7 @@ public class Player : MonoBehaviour
         }
         if (!FindObjectOfType<Boss>().bossAnimator.GetBool("BossPreAttack"))
         {
-            combo = 0;
+            combo = 0;           
             playerState = State.Alive;
         } 
         comboTxt.text = combo.ToString();
@@ -129,7 +139,7 @@ public class Player : MonoBehaviour
     public void GetCombo()
     {
         combo++;
-        comboTxt.text = "x" + combo;
+        
         if (combo == comboStandard[0])
         {
             print("combo!");
@@ -193,5 +203,39 @@ public class Player : MonoBehaviour
     {
         yield return new WaitForSeconds(.5f);
         startMoveDelayHealth = true;
+    }
+
+    public void UpdateCombo()
+    {
+        if (combo != 0)
+        {
+            comboTxt.text = "x" + combo;
+        }
+        else if(combo == 0)
+        {
+            comboTxt.text = " ";
+        }
+        ComboBar.fillAmount = Mathf.Clamp((float)combo / comboStandard[comboStandard.Count - 1], 0, 1);
+        if (previousCombo != combo)
+        {
+            turnBig = true;
+            previousCombo = combo;
+        }
+        if (Vector3.Distance(comboTxt.transform.localScale, BiggerScale) < 0.01f)
+        {
+            turnBig = false;
+        }
+        LargerNumber();
+    }
+    private void LargerNumber()
+    {
+        if (turnBig)
+        {
+            comboTxt.transform.localScale = Vector3.Lerp(comboTxt.transform.localScale, BiggerScale, 0.2f);
+        }
+        else if (!turnBig)
+        {
+            comboTxt.transform.localScale = Vector3.Lerp(comboTxt.transform.localScale, OriginalScale, 0.2f);
+        }
     }
 }

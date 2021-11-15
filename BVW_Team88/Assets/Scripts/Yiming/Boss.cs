@@ -32,9 +32,10 @@ public class Boss : MonoBehaviour
     private bool startMoveDelayHealth = false;
     public TextMeshProUGUI healthUI;
     public CameraShake cameraShake;
-    
+    public GameObject visualEffects;
     private void Start()
     {
+        visualEffects.SetActive(false);
         gameManager = FindObjectOfType<GameManager>();
         health = maxHealth;
         previousHealth = health;
@@ -99,6 +100,7 @@ public class Boss : MonoBehaviour
     /// </summary>
     public void WaitForPlayerAttack()
     {
+        visualEffects.SetActive(true);
         if (bossRounds[currentRound].attackedDecisionBar)
         {
             decisionBar = Instantiate(bossRounds[currentRound].attackedDecisionBar, DecisionBarInstantiatePlace.position, Quaternion.identity);           
@@ -109,6 +111,7 @@ public class Boss : MonoBehaviour
 
     public void BossAttack()
     {
+        visualEffects.SetActive(false);
         startTimer = false;
         Destroy(decisionBar, .5f);
         bossAnimator.SetBool("BossAttack", true);
@@ -142,6 +145,7 @@ public class Boss : MonoBehaviour
 
     public void BossWasAttacked(int damage)
     {
+        visualEffects.SetActive(false);
         startTimer = false;
         //print("was attacked");
         health -= damage;
@@ -173,6 +177,7 @@ public class Boss : MonoBehaviour
         }
     }
 
+    
 
     //alot of camera shake function to add in animation
     public void AppearShake()

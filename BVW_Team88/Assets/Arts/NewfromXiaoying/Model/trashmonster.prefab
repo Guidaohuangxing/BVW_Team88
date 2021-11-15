@@ -1050,6 +1050,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2040981325573298754}
   - component: {fileID: 2006842705253891499}
+  - component: {fileID: 1613471446}
   m_Layer: 0
   m_Name: trashmonster
   m_TagString: Untagged
@@ -1077,6 +1078,7 @@ Transform:
   - {fileID: 6703179407175082998}
   - {fileID: 491412069072899120}
   - {fileID: 6674249132059883947}
+  - {fileID: 3837482006633737738}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
@@ -1099,6 +1101,47 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1613471446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1664314392016109816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54fc946dc60925647932ef077decf3d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  health: 0
+  previousHealth: 0
+  currentRound: 0
+  bossRounds:
+  - damage: 20
+    roundNum: 0
+    waitTimeForAttack: 25
+    attackedDecisionBar: {fileID: 4810363213361135188, guid: 9e7f19767efa438489aeb6745ba1f720, type: 3}
+    score: 100
+  - damage: 40
+    roundNum: 1
+    waitTimeForAttack: 20
+    attackedDecisionBar: {fileID: 4810363213361135188, guid: 9e7f19767efa438489aeb6745ba1f720, type: 3}
+    score: 200
+  - damage: 80
+    roundNum: 2
+    waitTimeForAttack: 15
+    attackedDecisionBar: {fileID: 4810363213361135188, guid: 9e7f19767efa438489aeb6745ba1f720, type: 3}
+    score: 300
+  bossAnimator: {fileID: 2006842705253891499}
+  startTimer: 0
+  gameManager: {fileID: 0}
+  DecisionBarInstantiatePlace: {fileID: 0}
+  spawn: {fileID: 0}
+  healthBar: {fileID: 0}
+  delayHealth: {fileID: 0}
+  healthUI: {fileID: 0}
+  cameraShake: {fileID: 0}
 --- !u!1 &1753913666397479764
 GameObject:
   m_ObjectHideFlags: 0
@@ -6022,3 +6065,77 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1001 &2311860500378710198
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 2040981325573298754}
+    m_Modifications:
+    - target: {fileID: 1536881332172299961, guid: 2a0ef32548550474fa813b25b3a9b522, type: 3}
+      propertyPath: m_Name
+      value: MonsterPower
+      objectReference: {fileID: 0}
+    - target: {fileID: 1536881332172299962, guid: 2a0ef32548550474fa813b25b3a9b522, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1536881332172299962, guid: 2a0ef32548550474fa813b25b3a9b522, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1536881332172299962, guid: 2a0ef32548550474fa813b25b3a9b522, type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1536881332172299964, guid: 2a0ef32548550474fa813b25b3a9b522, type: 3}
+      propertyPath: m_RootOrder
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1536881332172299964, guid: 2a0ef32548550474fa813b25b3a9b522, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.014
+      objectReference: {fileID: 0}
+    - target: {fileID: 1536881332172299964, guid: 2a0ef32548550474fa813b25b3a9b522, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.1011
+      objectReference: {fileID: 0}
+    - target: {fileID: 1536881332172299964, guid: 2a0ef32548550474fa813b25b3a9b522, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.1253
+      objectReference: {fileID: 0}
+    - target: {fileID: 1536881332172299964, guid: 2a0ef32548550474fa813b25b3a9b522, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1536881332172299964, guid: 2a0ef32548550474fa813b25b3a9b522, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1536881332172299964, guid: 2a0ef32548550474fa813b25b3a9b522, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1536881332172299964, guid: 2a0ef32548550474fa813b25b3a9b522, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1536881332172299964, guid: 2a0ef32548550474fa813b25b3a9b522, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1536881332172299964, guid: 2a0ef32548550474fa813b25b3a9b522, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1536881332172299964, guid: 2a0ef32548550474fa813b25b3a9b522, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 2a0ef32548550474fa813b25b3a9b522, type: 3}
+--- !u!4 &3837482006633737738 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1536881332172299964, guid: 2a0ef32548550474fa813b25b3a9b522, type: 3}
+  m_PrefabInstance: {fileID: 2311860500378710198}
+  m_PrefabAsset: {fileID: 0}
