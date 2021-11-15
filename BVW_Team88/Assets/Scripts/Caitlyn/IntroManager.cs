@@ -5,17 +5,19 @@ using UnityEngine;
 public class IntroManager : MonoBehaviour
 {
     public ManageScenes ms;
-    public GameObject anim1, anim2; 
+    public AudioClip startClip;
+    public AudioSource BGM;
+    public SoundFXManager sfx; 
+
     public void StartGameUp() {
-        StartCoroutine(SwitchAnimations());
+        StartCoroutine(PlayAnnouncer());
     }
 
-    IEnumerator SwitchAnimations() {
-        anim2.SetActive(true);
-        anim1.SetActive(false);
-
-        yield return new WaitForSeconds(2.25f);
-
+    IEnumerator PlayAnnouncer() {
+        BGM.volume = 0.30f;
+        sfx.PlayStartNoise();
+        yield return new WaitForSeconds(startClip.length);
+        BGM.volume = 0.30f;
         ms.GoToInstructions();
 
     }
