@@ -74,7 +74,7 @@ public class ComboAttack : MonoBehaviour
                         attackDecisionBar.BeSlashedAndStop();
                         if (attackDecisionBar.isIntheRightArea)
                         {
-                            attackDecisionBar.itsBoss.BossWasAttacked(60);
+                            attackDecisionBar.itsBoss.BossWasAttacked(40);
                             if (ComboAttackEffect)
                             {
                                 Instantiate(ComboAttackEffect, zOffset + Vector3.forward * 0.3f - Vector3.up * 2.5f, Quaternion.identity);

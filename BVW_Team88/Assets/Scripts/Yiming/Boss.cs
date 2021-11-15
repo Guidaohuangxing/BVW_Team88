@@ -166,8 +166,9 @@ public class Boss : MonoBehaviour
 
     public void BossDead()
     {
-        if (health < 0)
+        if (health <= 0)
         {
+            bossAnimator.SetBool("BossDead", true);
             gameManager.isWin = true;
         }
     }
