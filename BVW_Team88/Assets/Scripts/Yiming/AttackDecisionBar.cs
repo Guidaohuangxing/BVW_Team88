@@ -30,6 +30,7 @@ public class AttackDecisionBar : MonoBehaviour
 
     public void Start()
     {
+        canMove = true;
         itsBoss = FindObjectOfType<Boss>();
         this.transform.position = new Vector3((Target1Pos.position + Target2Pos.position).x * Random.Range(0.1f, 0.9f), Target2Pos.position.y, Target2Pos.position.z);
         targetPoint = Target1Pos.position;

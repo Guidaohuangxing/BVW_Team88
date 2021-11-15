@@ -89,8 +89,7 @@ public class GameManager : MonoBehaviour
     private void Initialized()
     {
         players = playerParent.GetComponentsInChildren<Player>();
-        spawn = FindObjectOfType<SpawnAdvance>();
-        spawn.spawnState = SpawnAdvance.SpawnState.normal;
+        spawn = FindObjectOfType<SpawnAdvance>(); 
         bossController = FindObjectOfType<Boss>();
     }
 
@@ -100,5 +99,12 @@ public class GameManager : MonoBehaviour
         {
             manageScenes.GoToWin();
         }  
+    }
+
+
+    public void StartGame()
+    {
+        spawn.spawnState = SpawnAdvance.SpawnState.normal;
+        SetPlayerStateToCertainState(Player.State.Alive);
     }
 }

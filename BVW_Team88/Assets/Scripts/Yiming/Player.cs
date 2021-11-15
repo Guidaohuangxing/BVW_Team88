@@ -27,11 +27,16 @@ public class Player : MonoBehaviour
     public float threshold = .1f;
     public string tagName;
 
-    public Slider healthBar;
-    public Text healthVal;
+
+    public Image healthBar;
+    public Image delayHealth;
+    private bool startMoveDelayHealth = false;
+    public TextMeshProUGUI healthUI;
+
     public int MaxHealth = 100;
     [SerializeField]
     private int health = 100;
+    private float previousHealth = 0;
     [SerializeField]
     public int combo = 0;
     public List<int> comboStandard = new List<int>();
@@ -43,14 +48,14 @@ public class Player : MonoBehaviour
     private void Start()
     {
         health = MaxHealth;
-        healthBar.value = health;
-        healthVal.text = health + "/" + MaxHealth;
+        previousHealth = health;
         gameManager = FindObjectOfType<GameManager>();
         SetPlayerPosition();
     }
     private void Update()
     {
         CheckEnterDying();
+        UpdateHealth();
     }
 
 
@@ -99,8 +104,6 @@ public class Player : MonoBehaviour
         {
             health -= damage;
         }
-        healthBar.value = health;
-        healthVal.text = health + "/"+MaxHealth;
         combo = 0;
         playerState = State.Alive;
         comboTxt.text = combo.ToString();
@@ -114,9 +117,8 @@ public class Player : MonoBehaviour
         {
             health += heal;
         }
-        GetCombo();
-        healthBar.value = health;
-        healthVal.text = health + "/" + MaxHealth;
+        //GetCombo();
+        
     }
     /// <summary>
     /// cut thing in combo
@@ -158,5 +160,35 @@ public class Player : MonoBehaviour
             return true;
         }
         else { return false; }
+    }
+
+
+    public void UpdateHealth()
+    {
+        healthBar.fillAmount = (float)health / MaxHealth;
+        healthUI.text = health + " / " + MaxHealth;
+        if (health != previousHealth)
+        {
+
+            if (startMoveDelayHealth)
+            {
+                previousHealth = Mathf.Lerp(previousHealth, health, 0.02f);
+                delayHealth.fillAmount = (float)previousHealth / MaxHealth;
+            }
+            else if (!startMoveDelayHealth)
+            {
+                StartCoroutine(MoveDelayHealth());
+            }
+        }
+        else if (health == previousHealth)
+        {
+            startMoveDelayHealth = false;
+        }
+    }
+
+    IEnumerator MoveDelayHealth()
+    {
+        yield return new WaitForSeconds(.5f);
+        startMoveDelayHealth = true;
     }
 }
