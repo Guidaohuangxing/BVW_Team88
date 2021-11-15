@@ -26,6 +26,7 @@ public class SpawnAdvance : MonoBehaviour
         public List<GameObject> healingObjects;//
         public float bpmRatio;// the speed to spawn the objects
         public float bpm;//if need adjust than adjust this one
+        public AudioClip bgm;//put some bgm in it;
     }
 
     public int currentRoundsNumber = 0;//A pointer to check which are this;
