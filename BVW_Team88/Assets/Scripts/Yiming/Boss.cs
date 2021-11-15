@@ -158,6 +158,7 @@ public class Boss : MonoBehaviour
     public void StartWasAttackedAnimation()
     {
         bossAnimator.SetBool("BossWasAttacked", true);
+        
     }
 
 
@@ -181,6 +182,7 @@ public class Boss : MonoBehaviour
     public void StartEnvironMentAnimation()
     {
         environmentAnimator.SetTrigger("StartGame");
+        SoundFXManager.instance.PlayMonsterNormal();
     }
 
     //alot of camera shake function to add in animation

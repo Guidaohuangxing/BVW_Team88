@@ -118,8 +118,9 @@ public class Player : MonoBehaviour
         {
             combo = 0;           
             playerState = State.Alive;
-        } 
-        comboTxt.text = combo.ToString();
+        }
+        //sound
+        
         
     }
 
@@ -142,19 +143,19 @@ public class Player : MonoBehaviour
         
         if (combo == comboStandard[0])
         {
-            print("combo!");
+            SoundFXManager.instance.PlayComboPraise();
         }
         else if (combo == comboStandard[1])
         {
-            print("nice combo!");
+            SoundFXManager.instance.PlayComboPraise();
         }
         else if (combo == comboStandard[2])
         {
-            print("super combo!");
+            SoundFXManager.instance.PlayComboPraise();
         }
         else if (combo >= comboStandard[3])
         {
-            print("crazzzzzy combo!");
+            SoundFXManager.instance.PlayComboPraise();
             playerState = State.PowerUp;
         }
     }
