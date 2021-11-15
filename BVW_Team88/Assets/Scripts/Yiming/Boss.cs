@@ -33,6 +33,7 @@ public class Boss : MonoBehaviour
     public TextMeshProUGUI healthUI;
     public CameraShake cameraShake;
     public GameObject visualEffects;
+    public Animator environmentAnimator;
     private void Start()
     {
         visualEffects.SetActive(false);
@@ -177,7 +178,10 @@ public class Boss : MonoBehaviour
         }
     }
 
-    
+    public void StartEnvironMentAnimation()
+    {
+        environmentAnimator.SetTrigger("StartGame");
+    }
 
     //alot of camera shake function to add in animation
     public void AppearShake()
