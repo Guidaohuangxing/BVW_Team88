@@ -14,7 +14,7 @@ public class InteractiveTips : MonoBehaviour
             {
                 item.SetFloat("_EdgePower", 0.1f);
             }
-            print("set edge");
+            //print("set edge");
         }  
     }
 }

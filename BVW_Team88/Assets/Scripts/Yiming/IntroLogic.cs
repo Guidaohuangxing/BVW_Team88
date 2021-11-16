@@ -5,7 +5,10 @@ using UnityEngine;
 public class IntroLogic : MonoBehaviour
 {
     public Animator bossAnimator;
-    
+    private void Start()
+    {
+        SoundFXManager.instance.RacconEating();
+    }
     public void finish2dAnimate()
     {
         bossAnimator.SetTrigger("GameStart");

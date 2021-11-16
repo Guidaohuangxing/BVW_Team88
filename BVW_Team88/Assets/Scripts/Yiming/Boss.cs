@@ -34,6 +34,8 @@ public class Boss : MonoBehaviour
     public CameraShake cameraShake;
     public GameObject visualEffects;
     public Animator environmentAnimator;
+    private bool playOnlyOnce = false;
+    private bool onlyOneWasAttacked = false;
     private void Start()
     {
         visualEffects.SetActive(false);
@@ -49,9 +51,17 @@ public class Boss : MonoBehaviour
             timer += Time.deltaTime;
             if (timer >= bossRounds[currentRound].waitTimeForAttack)
             {
-                print("Tooooo Slow!");
+                //print("Tooooo Slow!");
                 BossAttack();
                 timer = 0;
+            }
+            if(timer>= bossRounds[currentRound].waitTimeForAttack - 3f)
+            {
+                if (!playOnlyOnce)
+                {
+                    SoundFXManager.instance.PlayTimeWarning();
+                    playOnlyOnce = true;
+                }  
             }
         }
         UpdateBossHealth();
@@ -93,14 +103,20 @@ public class Boss : MonoBehaviour
     public void StartPreAttack()
     {
         bossAnimator.SetBool("BossPreAttack", true);
+       
     }
 
+    public void playRageSound()
+    {
+        SoundFXManager.instance.PlayMonsterEnraged();
+    }
     /// <summary>
     /// boss enter preattack mode and wait for palyer combo attack
     /// be called at certain frame
     /// </summary>
     public void WaitForPlayerAttack()
     {
+        playOnlyOnce = false;
         visualEffects.SetActive(true);
         if (bossRounds[currentRound].attackedDecisionBar)
         {
@@ -136,7 +152,7 @@ public class Boss : MonoBehaviour
     {
         //print("reset all parameter");
         //reset all possible parameter
-        
+        onlyOneWasAttacked = false;
         bossAnimator.SetBool("BossAttack", false);
         bossAnimator.SetBool("BossPreAttack", false);
         bossAnimator.SetBool("BossWasAttacked", false);
@@ -154,6 +170,11 @@ public class Boss : MonoBehaviour
         //adjust GM and Boss's Rounds pointer;
         currentRound++;
         EndBossSection(currentRound);
+        if (!onlyOneWasAttacked)
+        {
+            SoundFXManager.instance.PlayMonsterHurt();
+            onlyOneWasAttacked = true;
+        }
     }
     public void StartWasAttackedAnimation()
     {
@@ -177,6 +198,10 @@ public class Boss : MonoBehaviour
             bossAnimator.SetBool("BossDead", true);
             gameManager.isWin = true;
         }
+    }
+    public void PlayBossDeadSound()
+    {
+        SoundFXManager.instance.PlayMonsterDeath();
     }
 
     public void StartEnvironMentAnimation()
