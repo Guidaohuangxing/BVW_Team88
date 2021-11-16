@@ -116,6 +116,8 @@ public class GameManager : MonoBehaviour
     {
         spawn.spawnState = SpawnAdvance.SpawnState.normal;
         SetPlayerStateToCertainState(Player.State.Alive);
+        players[0].combo = 0;
+        players[1].combo = 0;
         foreach (var item in delayReshowObject)
         {
             item.SetActive(true);

@@ -155,9 +155,13 @@ public class Player : MonoBehaviour
         }
         else if (combo >= comboStandard[3])
         {
-            SoundFXManager.instance.PlayComboPraise();
+            if(Random.Range(0,5) == 1)
+            {
+                SoundFXManager.instance.PlayComboPraise();
+            }
             playerState = State.PowerUp;
         }
+        
     }
 
 
@@ -180,7 +184,14 @@ public class Player : MonoBehaviour
     public void UpdateHealth()
     {
         healthBar.fillAmount = (float)health / MaxHealth;
-        healthUI.text = health + " / " + MaxHealth;
+        if(health>= 0)
+        {
+            healthUI.text = health + " / " + MaxHealth;
+        }
+        else if (health < 0)
+        {
+            healthUI.text = "0" + " / " + MaxHealth;
+        }
         if (health != previousHealth)
         {
 
