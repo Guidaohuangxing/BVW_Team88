@@ -232,4 +232,10 @@ public class Boss : MonoBehaviour
     {
         gameManager.StartGame();
     }
+
+    public void CameraBackwardShake()
+    {
+        cameraShake.ShakeBackwards();
+        SoundFXManager.instance.PlayMonsterNormal();
+    }
 }

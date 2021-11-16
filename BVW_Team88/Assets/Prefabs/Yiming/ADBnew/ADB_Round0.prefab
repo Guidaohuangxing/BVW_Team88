@@ -559,7 +559,7 @@ MonoBehaviour:
   isIntheRightArea: 0
   Target1Pos: {fileID: 2114686125343949812}
   Target2Pos: {fileID: 2114686125087521009}
-  speed: 0.05
+  speed: 0.03
   threshold: 0.1
   canMove: 0
   destroyThisObject: {fileID: 4810363213361135188}
@@ -588,8 +588,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6961697046614486758}
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0.7, y: 0, z: 0}
-  m_LocalScale: {x: 0.213585, y: 0.4, z: 0.15}
+  m_LocalPosition: {x: -0.071, y: 0, z: 0}
+  m_LocalScale: {x: 0.213585, y: 0.89, z: 0.15}
   m_Children:
   - {fileID: 5559086609009645341}
   m_Father: {fileID: 8470321218973079195}

@@ -74,7 +74,7 @@ public class ComboAttack : MonoBehaviour
                         attackDecisionBar.BeSlashedAndStop();
                         if (attackDecisionBar.isIntheRightArea)
                         {
-                            attackDecisionBar.itsBoss.BossWasAttacked(120);
+                            attackDecisionBar.itsBoss.BossWasAttacked(40);
                             if (ComboAttackEffect)
                             {
                                 SoundFXManager.instance.PlayPowerUp();

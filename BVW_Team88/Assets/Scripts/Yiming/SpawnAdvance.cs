@@ -6,7 +6,7 @@ public class SpawnAdvance : MonoBehaviour
 {
     public float bpm = 96.0f;
     public float bpmSpawn;
-
+    public AudioSource AS;
     [System.Serializable]
     public enum SpawnState
     {
@@ -30,14 +30,19 @@ public class SpawnAdvance : MonoBehaviour
     }
 
     public int currentRoundsNumber = 0;//A pointer to check which are this;
+    public int previousRoundsPointer;
     public List<Round> rounds = new List<Round>();
     public List<GameObject> objectsWasSpawn = new List<GameObject>();
     private float timer = 0;//calculate time
-
+    private void Start()
+    {
+        previousRoundsPointer = currentRoundsNumber;
+    }
     private void Update()
     {
         SpawnObjectsByState(spawnState);
         MoveSpawnObjects(objectsWasSpawn);
+        ChangeBGM();
     }
 
 
@@ -111,7 +116,15 @@ public class SpawnAdvance : MonoBehaviour
         }
     }
 
-
+    public void ChangeBGM()
+    {
+        if (previousRoundsPointer != currentRoundsNumber)
+        {
+            AS.clip = rounds[currentRoundsNumber].bgm;
+            AS.Play();
+            previousRoundsPointer = currentRoundsNumber;
+        }
+    }
     private float SetBpmSpawn(float bpm, float bpmRatio)
     {
         float bpmspawn = (60 / bpm) * bpmRatio;

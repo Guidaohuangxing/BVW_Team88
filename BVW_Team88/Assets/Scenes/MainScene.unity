@@ -134,41 +134,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!21 &52526593
-Material:
-  serializedVersion: 6
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Sprites/Default
-  m_Shader: {fileID: 10753, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _AlphaTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Floats:
-    - PixelSnap: 0
-    - _EnableExternalAlpha: 0
-    m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Flip: {r: 1, g: 1, b: 1, a: 1}
-    - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
-  m_BuildTextureStacks: []
 --- !u!1 &106321851 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7926724359355389696, guid: 8cd6d055554b69f41be4114a8b7f1252, type: 3}
@@ -222,6 +187,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6611475220022934996, guid: 3b89a9b87b39e7b42bc70a5f4b717af1, type: 3}
+      propertyPath: AS
+      value: 
+      objectReference: {fileID: 379109482}
     - target: {fileID: 6611475220022934996, guid: 3b89a9b87b39e7b42bc70a5f4b717af1, type: 3}
       propertyPath: rounds.Array.size
       value: 3
@@ -5389,7 +5358,7 @@ MonoBehaviour:
   cameraShake: {fileID: 1347103562}
   visualEffects: {fileID: 0}
   environmentAnimator: {fileID: 0}
---- !u!43 &871002455
+--- !u!43 &907881242
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -7727,6 +7696,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 597433e569be9ae49becd0a87978c72a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!21 &1483568260
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Sprites/Default
+  m_Shader: {fileID: 10753, guid: 0000000000000000f000000000000000, type: 0}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _AlphaTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - PixelSnap: 0
+    - _EnableExternalAlpha: 0
+    m_Colors:
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Flip: {r: 1, g: 1, b: 1, a: 1}
+    - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
+  m_BuildTextureStacks: []
 --- !u!1 &1484312966
 GameObject:
   m_ObjectHideFlags: 0
@@ -8032,16 +8036,24 @@ PrefabInstance:
       objectReference: {fileID: 1178541920}
     - target: {fileID: 1613471446, guid: 6705a563f6e828743a72227ba2cd9033, type: 3}
       propertyPath: bossRounds.Array.data[0].waitTimeForAttack
-      value: 10
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 1613471446, guid: 6705a563f6e828743a72227ba2cd9033, type: 3}
       propertyPath: bossRounds.Array.data[1].waitTimeForAttack
-      value: 10
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1613471446, guid: 6705a563f6e828743a72227ba2cd9033, type: 3}
       propertyPath: bossRounds.Array.data[2].waitTimeForAttack
-      value: 10
+      value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 1613471446, guid: 6705a563f6e828743a72227ba2cd9033, type: 3}
+      propertyPath: bossRounds.Array.data[1].attackedDecisionBar
+      value: 
+      objectReference: {fileID: 4407250235350429036, guid: 5b215501c4791ab46a33aff7f5c6108f, type: 3}
+    - target: {fileID: 1613471446, guid: 6705a563f6e828743a72227ba2cd9033, type: 3}
+      propertyPath: bossRounds.Array.data[2].attackedDecisionBar
+      value: 
+      objectReference: {fileID: 4013583882159996911, guid: 15f6393cc21cf214a82d977426940115, type: 3}
     - target: {fileID: 320573648954492529, guid: 6705a563f6e828743a72227ba2cd9033, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.266
@@ -8870,11 +8882,11 @@ PrefabInstance:
     - target: {fileID: 2348914, guid: 4d293c8e162f3874b982baadd71153d2, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 52526593}
+      objectReference: {fileID: 1483568260}
     - target: {fileID: 3380982, guid: 4d293c8e162f3874b982baadd71153d2, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 871002455}
+      objectReference: {fileID: 907881242}
     - target: {fileID: 1000014254142504, guid: 4d293c8e162f3874b982baadd71153d2, type: 3}
       propertyPath: m_IsActive
       value: 0
