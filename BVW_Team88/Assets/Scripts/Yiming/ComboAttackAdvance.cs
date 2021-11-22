@@ -180,7 +180,7 @@ public class ComboAttackAdvance : MonoBehaviour
         {
             foreach(var item in players)
             {
-                item.childSword.SwordTransform.position = Vector3.Lerp(item.childSword.SwordTransform.position, combinePlace.position, 0.02f);
+                item.childSword.SwordTransform.position = Vector3.Lerp(item.childSword.SwordTransform.position, combinePlace.position, 0.03f);
             }
         }
         else
