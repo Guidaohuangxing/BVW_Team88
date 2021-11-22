@@ -9,7 +9,7 @@ public class SoundFXManager : MonoBehaviour
 
     public AudioClip monsterMad, monsterNormal, monsterDeath, monsterHurt, monsterEnraged,sliceNoise, hitByMonster;
     public AudioClip defeatClip, startClip, timeIsRunningOut, victoryClip, comboClip;
-    public AudioClip powerupAttack, raccoonEating;
+    public AudioClip powerupAttack, raccoonEating, comboAnimationSound;
     public List<AudioClip> randomHit = new List<AudioClip>();
     public List<AudioClip> randomPraise = new List<AudioClip>();
     private void Awake()
@@ -110,4 +110,8 @@ public class SoundFXManager : MonoBehaviour
         monster.PlayOneShot(raccoonEating);
     }
     //-------------------------------------------------------------
+    public void PlayComboAnimation()
+    {
+        announcer.PlayOneShot(comboAnimationSound);
+    }
 }

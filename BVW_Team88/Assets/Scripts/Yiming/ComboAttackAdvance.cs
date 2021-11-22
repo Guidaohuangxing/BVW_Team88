@@ -200,6 +200,7 @@ public class ComboAttackAdvance : MonoBehaviour
         weaponCombineAnimation.transform.position = combinePlace.position;
         startPoint = (swordTrackers[0].position + swordTrackers[1].position) / 2;
         oneSwordUpdateOffset = Vector3.ProjectOnPlane(startPoint, new Vector3(0, 0, 1)) - combinePlace.position;
+        SoundFXManager.instance.PlayComboAnimation();
     }
 
     public void UpdateOneSwordSprite()
