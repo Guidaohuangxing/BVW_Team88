@@ -36,12 +36,14 @@ public class Boss : MonoBehaviour
     public Animator environmentAnimator;
     private bool playOnlyOnce = false;
     private bool onlyOneWasAttacked = false;
+    private ComboAttackAdvance caa;
     private void Start()
     {
         visualEffects.SetActive(false);
         gameManager = FindObjectOfType<GameManager>();
         health = maxHealth;
         previousHealth = health;
+        caa = FindObjectOfType<ComboAttackAdvance>();
     }
 
     private void Update()
@@ -144,6 +146,7 @@ public class Boss : MonoBehaviour
         {
             item.TakeDamage(bossRounds[currentRound].damage);
         }
+        
     }
     /// <summary>
     /// be called at go back animation
@@ -157,6 +160,8 @@ public class Boss : MonoBehaviour
         bossAnimator.SetBool("BossPreAttack", false);
         bossAnimator.SetBool("BossWasAttacked", false);
         gameManager.SetPlayerStateToCertainState(Player.State.Alive);
+        caa.ResetAllSprite();
+        caa.comboState = ComboAttackAdvance.ComboState.wait;
     }
 
 

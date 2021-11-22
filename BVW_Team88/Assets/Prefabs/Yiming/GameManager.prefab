@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 954215081}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.17, y: -0.48, z: 0.56}
+  m_LocalPosition: {x: 0.17, y: -0.88, z: 0.56}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1391683114119871170}
@@ -54,11 +54,71 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2136378639}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.98, y: -0.48, z: 0.56}
+  m_LocalPosition: {x: 0.98, y: -0.88, z: 0.56}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1391683113907175883}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &265770122830126094
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5368575240988909873}
+  m_Layer: 0
+  m_Name: SwordOffset
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5368575240988909873
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 265770122830126094}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.04, y: 0.27, z: 0.5600004}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1391683115184479759}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &830288297520481159
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1049608547285214520}
+  m_Layer: 0
+  m_Name: CombinePosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1049608547285214520
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 830288297520481159}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.04, y: 1.38, z: 0.5600004}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1391683115184479759}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1391683113907175882
 GameObject:
@@ -84,7 +144,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1391683113907175882}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.539, y: 0.5, z: 0}
+  m_LocalPosition: {x: -2.19, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1391683114648159971}
@@ -186,28 +246,19 @@ MonoBehaviour:
     swordPos: {fileID: 1391683114365521061}
     playerPos: {fileID: 1391683114119871170}
     swordSpritePos: {fileID: 954215082}
-  upperSwordAreas:
-  - number: 2
-    leftX: 0
-    rightX: 0
-    highY: 0
-    lowY: 0
-    swordPos: {fileID: 1391683115070758565}
-    playerPos: {fileID: 1391683115118078379}
-    swordSpritePos: {fileID: 0}
-  - number: 3
-    leftX: 0
-    rightX: 0
-    highY: 0
-    lowY: 0
-    swordPos: {fileID: 1391683114986755441}
-    playerPos: {fileID: 1391683114033222057}
-    swordSpritePos: {fileID: 0}
-  life: 200
   score: 0
   playerParent: {fileID: 0}
-  pathsNum: 2
+  bossController: {fileID: 0}
   isWin: 0
+  delayReshowObject:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  comboAttack: {fileID: 0}
 --- !u!1 &1391683114119871173
 GameObject:
   m_ObjectHideFlags: 0
@@ -422,6 +473,8 @@ Transform:
   - {fileID: 1391683113907175883}
   - {fileID: 1391683114033222057}
   - {fileID: 1391683115118078379}
+  - {fileID: 1049608547285214520}
+  - {fileID: 5368575240988909873}
   m_Father: {fileID: 1391683114043630376}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
