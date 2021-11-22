@@ -87,6 +87,12 @@ public class GameManager : MonoBehaviour
         players[1].playerState = state;
     }
 
+    public void ResetPlayerCombo()
+    {
+        players[0].ResetCombo();
+        players[1].ResetCombo();
+    }
+
 
     private void Initialized()
     {

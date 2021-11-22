@@ -250,4 +250,8 @@ public class Player : MonoBehaviour
             comboTxt.transform.localScale = Vector3.Lerp(comboTxt.transform.localScale, OriginalScale, 0.2f);
         }
     }
+    public void ResetCombo()
+    {
+        combo = 0;
+    } 
 }

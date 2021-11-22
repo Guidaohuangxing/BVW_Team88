@@ -147,6 +147,7 @@ public class Boss : MonoBehaviour
             item.TakeDamage(bossRounds[currentRound].damage);
         }
         
+
     }
     /// <summary>
     /// be called at go back animation
@@ -160,6 +161,7 @@ public class Boss : MonoBehaviour
         bossAnimator.SetBool("BossPreAttack", false);
         bossAnimator.SetBool("BossWasAttacked", false);
         gameManager.SetPlayerStateToCertainState(Player.State.Alive);
+        gameManager.ResetPlayerCombo();
         caa.ResetAllSprite();
         caa.comboState = ComboAttackAdvance.ComboState.wait;
     }
@@ -202,6 +204,10 @@ public class Boss : MonoBehaviour
         {
             bossAnimator.SetBool("BossDead", true);
             gameManager.isWin = true;
+            caa.ResetAllSprite();
+            caa.comboState = ComboAttackAdvance.ComboState.wait;
+            gameManager.SetPlayerStateToCertainState(Player.State.Alive);
+            gameManager.ResetPlayerCombo();
         }
     }
     public void PlayBossDeadSound()
